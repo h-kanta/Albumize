@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var photoData: PhotoViewModel
+    @StateObject var albumData: AlbumViewModel
+    @StateObject var photoPicker: PhotoPickerViewModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        BottomTabView(photoData: .init(), albumData: .init(), photoPicker: .init())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+//        let photo = PhotoModel()
+//        ContentView(photoViewModel: .init(photo: photo))
+        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
     }
 }
+

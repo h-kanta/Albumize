@@ -7,14 +7,31 @@
 
 import SwiftUI
 
-struct Tab: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+// 下部タブバー用
+enum Tab: String, CaseIterable {
+    case home = "ホーム"
+    case album = "アルバム"
+    case plus = ""
+    case plan = "予定"
+    case profile = "プロフィール"
+    
+    //
+    var systemImage: String {
+        switch self {
+        case .home:
+            return "house.fill"
+        case .album:
+            return "person.2.square.stack.fill"
+        case .plus:
+            return "plus.app.fill"
+        case .plan:
+            return "list.bullet.rectangle"
+        case .profile:
+            return "person.fill"
+        }
     }
-}
-
-struct Tab_Previews: PreviewProvider {
-    static var previews: some View {
-        Tab()
-    }
+    
+//    var index: Int {
+//        return Tab.allCases.firstIndex(of: self) ?? 0
+//    }
 }

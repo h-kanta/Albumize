@@ -9,7 +9,15 @@ import SwiftUI
 
 struct PlanView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ZStack {
+                Color("Bg")
+                    .edgesIgnoringSafeArea(.all)
+                
+                Text("Plan")
+            }
+            .navigationBarTitle("予定", displayMode: .inline)
+        }
     }
 }
 
