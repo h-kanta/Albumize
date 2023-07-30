@@ -20,8 +20,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-//        let photo = PhotoModel()
-//        ContentView(photoViewModel: .init(photo: photo))
         ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
     }
 }

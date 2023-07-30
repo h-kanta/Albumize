@@ -18,39 +18,39 @@ struct HomeView: View {
                 Color("Bg")
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack(alignment: .leading, spacing: 4) {
-                    
-                    if let album = albumData.albums.randomElement() {
-                        if let photo = album.photos.randomElement() {
-                            
-                            VStack(alignment: .leading, spacing: 0) {
-                                Text("アルバム名")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color("Primary").opacity(0.8))
-                                    .padding(6)
-                                    .background(.white.opacity(0.5))
-                                    .cornerRadius(7)
-                                
-                                Text(album.name)
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color("Primary"))
-                                    .padding(6)
-                                    .background(.white.opacity(0.5))
-                                    .cornerRadius(7)
-                            }
-                            .padding(.horizontal)
-                            
-                            Image(photo.value)
-                                .resizable()
-                                .scaledToFit()
-                                .border(Color("Primary"), width: 8)
-                                .cornerRadius(10)
-                                .padding()
-                        }
-                    }
-                }
-                .padding()
+//                VStack(alignment: .leading, spacing: 4) {
+//
+//                    if let album = albumData.albums.randomElement() {
+//                        if let photo = album.photos.randomElement() {
+//
+//                            VStack(alignment: .leading, spacing: 0) {
+//                                Text("アルバム名")
+//                                    .font(.subheadline)
+//                                    .foregroundColor(Color("Primary").opacity(0.8))
+//                                    .padding(6)
+//                                    .background(.white.opacity(0.5))
+//                                    .cornerRadius(7)
+//
+//                                Text(album.name)
+//                                    .font(.title3)
+//                                    .fontWeight(.bold)
+//                                    .foregroundColor(Color("Primary"))
+//                                    .padding(6)
+//                                    .background(.white.opacity(0.5))
+//                                    .cornerRadius(7)
+//                            }
+//                            .padding(.horizontal)
+//
+//                            photo.image
+//                                .resizable()
+//                                .scaledToFit()
+//                                .border(Color("Primary"), width: 8)
+//                                .cornerRadius(10)
+//                                .padding()
+//                        }
+//                    }
+//                }
+//                .padding()
                 
             }
             .navigationBarTitle("Albumize", displayMode: .inline)

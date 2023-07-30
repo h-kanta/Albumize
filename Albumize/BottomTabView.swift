@@ -33,6 +33,7 @@ struct BottomTabView: View {
                     .tag(Tab.profile)
             }
             
+            // 下部タブバー
             CustomTabBar()
                 .padding(.vertical, 20)
                 .background(Color.white)
@@ -41,6 +42,7 @@ struct BottomTabView: View {
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .ignoresSafeArea()
             
+            // 写真ビュー表示
             if photoData.isSelectedPhoto {
                 PhotoView(photoData: photoData)
             }

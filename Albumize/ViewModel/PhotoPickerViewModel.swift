@@ -28,9 +28,10 @@ class PhotoPickerViewModel: ObservableObject {
         // PHAsset という iOS の写真フレームワークのクラスを使用して、
         // ユーザーライブラリから画像のアセットを取得し、PhotoAssetModel に変換して fetchedPhotos に追加
         // 希望に応じて変更します
+        options.fetchLimit = 100 // 一度に取得するアセット数
         options.includeHiddenAssets = false
         options.includeAssetSourceTypes = [.typeUserLibrary]
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)] // 作成日時で降順ソート
         PHAsset.fetchAssets(with: .image, options: options).enumerateObjects { asset, _, _ in
             let photoAsset: PhotoAssetModel = .init(asset: asset)
             self.fetchedPhotos.append(photoAsset)

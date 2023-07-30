@@ -1,0 +1,6 @@
+framework module Pods_Albumize {
+  umbrella header "Pods-Albumize-umbrella.h"
+
+  export *
+  module * { export * }
+}

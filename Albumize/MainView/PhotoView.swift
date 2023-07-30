@@ -12,6 +12,8 @@ struct PhotoView: View {
     @StateObject var photoData: PhotoViewModel
     //
     let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    //
+    @State var isPhotoMenuShowing: Bool = false
     
     var body: some View {
         ZStack {
@@ -22,7 +24,7 @@ struct PhotoView: View {
             
             TabView(selection: $photoData.selectedPhotoID) {
                 ForEach(photoData.photos) { photo in
-                    Image(photo.value)
+                    photo.image
                         .resizable()
                         .scaledToFit()
                         .tag(photo.id)
@@ -32,12 +34,17 @@ struct PhotoView: View {
                             isSource: photoData.isSelectedPhoto
                         )
                         .offset(photoData.photoPosition)
+                        .edgesIgnoringSafeArea(.all)
                 }
             }
             .gesture(
                 DragGesture()
                     .onChanged{ value in
-                        photoData.photoPosition.height = value.translation.height
+                        if (abs(value.translation.height) > 20) {
+                            photoData.photoPosition.height = value.translation.height
+                            // メニュー非表示
+                            isPhotoMenuShowing = false
+                        }
                     }.onEnded{ value in
                         withAnimation(.spring(response: 0.2, dampingFraction: 0.75)) {
                             if 100 < abs(photoData.photoPosition.height) {
@@ -50,27 +57,52 @@ struct PhotoView: View {
                     }
             )
             .onTapGesture {
-//              photoViewModel.isSelectedPhoto = false
-//              photoViewModel.selectedPhotoID = .init()
                 // TabViewでカルーセルが機能するように記載
+                // メニュー表示/非表示
+                withAnimation(.easeInOut) {
+                    isPhotoMenuShowing.toggle()
+                }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            // 上メニュー
             .overlay(alignment: .topTrailing) {
                 Button {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
+                    withAnimation(.spring(response: 0.2, dampingFraction: 0.75)) {
                         photoData.isSelectedPhoto = false
                     }
                 } label: {
                     Image(systemName: "xmark")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.title)
                         .foregroundColor(Color("Primary"))
                 }
                 .padding()
                 .padding(.top, windowScene?.windows.first?.safeAreaInsets.top)
-                .opacity(!photoData.isSelectedPhoto ? 0 : min(1, max(0, 1 - abs(Double(photoData.photoPosition.height) / 800))))
+                .opacity(isPhotoMenuShowing ? 1 : 0)
+//                .opacity(!photoData.isSelectedPhoto ? 0 : min(1, max(0, 1 - abs(Double(photoData.photoPosition.height) / 800))))
             }
-            .edgesIgnoringSafeArea(.all)
+            
+            // 下メニュー
+            .overlay(alignment: .bottom) {
+                HStack {
+                    Spacer()
+                    Image(systemName: "square.and.arrow.down")
+                        .onTapGesture {
+                            
+                        }
+                    Spacer()
+                    Image(systemName: "heart")
+                        .onTapGesture {
+                            
+                        }
+                    Spacer()
+                }
+                .font(.title)
+                .foregroundColor(Color("Primary"))
+                .padding()
+                .padding()
+                .opacity(isPhotoMenuShowing ? 1 : 0)
+            }
             .ignoresSafeArea()
         }
     }

@@ -11,7 +11,7 @@ struct Album: Identifiable {
     let id: UUID = UUID()
     var name: String = ""
     var createDate: String = ""
-    var thumbnail: String = ""
+    var thumbnail: Image = .init("")
     var isFavorited: Bool = false
     var photos: [Photo] = []
 }

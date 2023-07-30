@@ -23,27 +23,27 @@ class AlbumViewModel: ObservableObject {
             Album(
                 name: "USJ",
                 createDate: "2023年4月14日",
-                thumbnail: "usjImage8",
+                thumbnail: Image("usjImage8"),
                 photos: [
-                    Photo(value: "usjImage1"), Photo(value: "usjImage2"), Photo(value: "usjImage3"), Photo(value: "usjImage4"), Photo(value: "usjImage5"), Photo(value: "usjImage6"), Photo(value: "usjImage7"), Photo(value: "usjImage8"), Photo(value: "usjImage9"),
+                    Photo(image: Image("usjImage1")), Photo(image: Image("usjImage2")), Photo(image: Image("usjImage3")), Photo(image: Image("usjImage4")), Photo(image: Image("usjImage5")), Photo(image: Image("usjImage6")), Photo(image: Image("usjImage7")), Photo(image: Image("usjImage8")), Photo(image: Image("usjImage9")),
                 ]
             ),
             // おぱんちゅうさぎ展
             Album(
                 name: "おぱんちゅうさぎ展",
                 createDate: "2023年4月22日",
-                thumbnail: "img2",
+                thumbnail: Image("img2"),
                 photos: [
-                    Photo(value: "img1"), Photo(value: "img2"), Photo(value: "img3"), Photo(value: "img4"), Photo(value: "img5"), Photo(value: "img6"),
+                    Photo(image: Image("img1")), Photo(image: Image("img2")), Photo(image: Image("img3")), Photo(image: Image("img4")), Photo(image: Image("img5")), Photo(image: Image("img6")),
                 ]
             ),
             // ハリーポッター
             Album(
                 name: "ハリーポッター",
                 createDate: "2023年6月24日",
-                thumbnail: "hari8",
+                thumbnail: Image("hari8"),
                 photos: [
-                    Photo(value: "hari1"), Photo(value: "hari2"), Photo(value: "hari3"), Photo(value: "hari4"), Photo(value: "hari5"), Photo(value: "hari6"), Photo(value: "hari7"), Photo(value: "hari8"),
+                    Photo(image: Image("hari1")), Photo(image: Image("hari2")), Photo(image: Image("hari3")), Photo(image: Image("hari4")), Photo(image: Image("hari5")), Photo(image: Image("hari6")), Photo(image: Image("hari7")), Photo(image: Image("hari8")),
                 ]
             )
         ]

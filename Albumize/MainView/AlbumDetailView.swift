@@ -12,8 +12,10 @@ struct AlbumDetailView: View {
     @StateObject var photoData: PhotoViewModel
     @Binding var album: Album
     
-    @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 3), count: 3)
+    @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 1), count: 3)
     
+    let deviceSize = UIScreen.main.bounds.size
+          
     var body: some View {
         NavigationStack {
             ZStack {
@@ -23,51 +25,63 @@ struct AlbumDetailView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
+                            // アルバム名
                             Text(album.name)
                                 .foregroundColor(Color("Primary"))
                                 .font(.title3)
                                 .fontWeight(.bold)
-                            
-                            Text(album.createDate)
-                                .font(.caption)
-                                .foregroundColor(.gray)
+                            // 作成日 - アルバム写真数
+                            HStack(spacing: 3) {
+                                Text(album.createDate)
+                                Text("-")
+                                Text("\(album.photos.count) 写真")
+                            }
+                            .font(.caption)
+                            .foregroundColor(.gray)
                         }
                         
                         Spacer()
                         
                         FavoriteButtonView(album: $album)
                     }
-                    .padding([.top, .horizontal])
+                    .padding()
                     
-                    ScrollView {
-                        LazyVGrid(columns: gridColumns, spacing: 3) {
-                            ForEach(album.photos) { photo in
-                                Rectangle()
-                                    .overlay {
-                                        Image(photo.value)
-                                            .resizable()
-                                            .scaledToFill()
-                                    }
-                                    .foregroundColor(Color("Bg"))
-                                    .scaledToFit()
-                                    .cornerRadius(3)
-                                    .matchedGeometryEffect(
-                                        id: photo.id,
-                                        in: photo.namespace,
-                                        isSource: !photoData.isSelectedPhoto
-                                    )
-                                    .onTapGesture {
-                                        photoData.photos = album.photos
-                                        photoData.photoPosition = .zero
-//                                        withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
-                                        photoData.isSelectedPhoto = true
-                                        photoData.selectedPhotoID = photo.id
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack {
+                            LazyVGrid(columns: gridColumns, spacing: 1) {
+                                ForEach(album.photos) { photo in
+//                                    Rectangle()
+//                                        .overlay {
+//                                            Image(photo.value)
+//                                                .resizable()
+//                                                .scaledToFill()
 //                                        }
-                                    }
-            
+//                                        .foregroundColor(Color("Bg"))
+//                                        .scaledToFit()
+//                                        .cornerRadius(3)
+                                    photo.image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
+                                        .contentShape(Rectangle())
+                                        .matchedGeometryEffect(
+                                            id: photo.id,
+                                            in: photo.namespace,
+                                            isSource: !photoData.isSelectedPhoto
+                                        )
+                                        .clipped()
+                                        .onTapGesture {
+                                            withAnimation(.spring(response: 0.2, dampingFraction: 0.75)) {
+                                                photoData.photos = album.photos
+                                                photoData.photoPosition = .zero
+                                                photoData.isSelectedPhoto = true
+                                                photoData.selectedPhotoID = photo.id
+                                            }
+                                        }
+                                    
+                                }
                             }
                         }
-                        .padding(.vertical)
                     }
                 }
             }

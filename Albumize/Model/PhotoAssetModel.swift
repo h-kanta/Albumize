@@ -14,5 +14,7 @@ struct PhotoAssetModel: Identifiable {
     var thumbnail: UIImage?
     // 選択順
     var assetIndex: Int = -1
+    // 選択状態か
+    var isSelected: Bool = false
 }
 

@@ -29,62 +29,28 @@ struct AlbumView: View {
                 VStack {
                     Text("").frame(height: 0) // 空白を作るため
                     
-                    ScrollView {
-//                        ZStack {
-//                            VStack {
-//                                HStack {
-//                                    Spacer()
-//
-//                                    Button {
-//                                    } label: {
-//                                        Text("並び替え")
-//
-//                                        Image(systemName: "slider.vertical.3")
-//                                            .font(.title2)
-//                                            .fontWeight(.bold)
-//                                    }
-//                                    .foregroundColor(.black)
-//                                    .padding(7)
-//                                    .background(.white)
-//                                    .cornerRadius(8)
-//
-//                                    Button {
-//                                    } label: {
-//                                        Text("編集")
-//
-//                                        Image(systemName: "square.and.pencil")
-//                                            .font(.title2)
-//                                            .fontWeight(.bold)
-//                                    }
-//                                    .foregroundColor(.black)
-//                                    .padding(7)
-//                                    .background(.white)
-//                                    .cornerRadius(8)
-//                                }
-//                                .padding(.horizontal)
-//                            }
-//                        }
-//                        .zIndex(2)
-                        
-                        ZStack {
-                            VStack(spacing: 10) {
-                                ForEach($albumData.albums) { album in
-                                    ZStack {
-                                        NavigationLink {
-                                            AlbumDetailView(photoData: photoData, album: album)
-                                        } label: {
-                                            AlbumCardView(album: album)
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack {
+                            ZStack {
+                                VStack(spacing: 10) {
+                                    ForEach($albumData.albums) { album in
+                                        ZStack {
+                                            NavigationLink {
+                                                AlbumDetailView(photoData: photoData, album: album)
+                                            } label: {
+                                                AlbumCardView(album: album)
+                                            }
+                                            
+                                            FavoriteButtonView(album: album)
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                                                .padding()
                                         }
-                                        
-                                        FavoriteButtonView(album: album)
-                                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                                            .padding()
                                     }
                                 }
+                                .padding([.horizontal, .bottom])
                             }
-                            .padding([.horizontal, .bottom])
+                            .zIndex(1)
                         }
-                        .zIndex(1)
                         
                     }
                 }
@@ -112,7 +78,7 @@ struct AlbumCardView: View {
     @Binding var album: Album
     var body: some View {
         ZStack {
-            Image(album.thumbnail)
+            album.thumbnail
                 .resizable()
                 .scaledToFill()
                 .frame(height: 180, alignment: .center)
@@ -121,12 +87,18 @@ struct AlbumCardView: View {
                 .cornerRadius(10)
             
             VStack(alignment: .leading) {
+                // アルバム名
                 Text(album.name)
                     .font(.headline)
                     .fontWeight(.bold)
                     .padding(.bottom, 3)
-                Text(album.createDate)
-                    .font(.caption)
+                // 作成日 - アルバム写真数
+                HStack(spacing: 3) {
+                    Text(album.createDate)
+                    Text("-")
+                    Text("\(album.photos.count) 写真")
+                }
+                .font(.caption)
             }
             .padding()
             .foregroundColor(.white)
@@ -136,13 +108,13 @@ struct AlbumCardView: View {
     }
 }
 
-// アルバムのお気に入りボタン
+// お気に入りボタン
 struct FavoriteButtonView: View {
     @Binding var album: Album
     var body: some View {
         Image(systemName: album.isFavorited ? "suit.heart.fill" : "suit.heart")
             .font(.title2)
-            .foregroundColor(Color("Primary"))
+            .foregroundColor(Color("Sub"))
             .padding(8)
             .background(.white.opacity(0.8))
             .cornerRadius(10)
