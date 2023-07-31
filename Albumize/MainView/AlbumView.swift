@@ -24,7 +24,7 @@ struct AlbumView: View {
         NavigationStack {
             ZStack {
                 Color("Bg")
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                 
                 VStack {
                     Text("").frame(height: 0) // 空白を作るため

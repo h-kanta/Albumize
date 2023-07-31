@@ -12,7 +12,7 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             Color("Bg")
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea()
             
             Text("user")
         }

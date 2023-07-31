@@ -15,7 +15,7 @@ struct BottomTabView: View {
     @StateObject var photoPicker: PhotoPickerViewModel
     // タブ
     @State var activeTab: Tab = .home
-        
+    
     var body: some View {
         ZStack {
             TabView(selection: $activeTab) {

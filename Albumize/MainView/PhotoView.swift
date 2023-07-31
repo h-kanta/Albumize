@@ -34,7 +34,7 @@ struct PhotoView: View {
                             isSource: photoData.isSelectedPhoto
                         )
                         .offset(photoData.photoPosition)
-                        .edgesIgnoringSafeArea(.all)
+                        .ignoresSafeArea()
                 }
             }
             .gesture(

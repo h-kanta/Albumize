@@ -20,7 +20,7 @@ struct AlbumDetailView: View {
         NavigationStack {
             ZStack {
                 Color("Bg")
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                 
                 VStack(alignment: .leading) {
                     HStack {

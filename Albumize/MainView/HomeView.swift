@@ -16,7 +16,7 @@ struct HomeView: View {
         NavigationStack {
             ZStack {
                 Color("Bg")
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                 
 //                VStack(alignment: .leading, spacing: 4) {
 //

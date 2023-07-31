@@ -78,6 +78,7 @@ struct AddAlbumView: View {
                             .padding()
                             .background(.white)
                             .cornerRadius(10)
+                            .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
                     }
                     .padding()
                     

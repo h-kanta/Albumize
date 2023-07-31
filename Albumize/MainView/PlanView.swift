@@ -12,7 +12,7 @@ struct PlanView: View {
         NavigationStack {
             ZStack {
                 Color("Bg")
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                 
                 Text("Plan")
             }
