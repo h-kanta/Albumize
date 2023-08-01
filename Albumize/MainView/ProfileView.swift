@@ -6,15 +6,37 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ProfileView: View {
     
+    @State var isPresented: Bool = false
+    
     var body: some View {
-        ZStack {
-            Color("Bg")
-                .ignoresSafeArea()
-            
-            Text("user")
+        NavigationStack {
+            ZStack {
+                Color("Bg")
+                    .ignoresSafeArea()
+                
+                VStack{
+                    Button {
+                        do {
+                            try Auth.auth().signOut()
+                            isPresented = true
+                        } catch let signOutError as NSError {
+                            print("Error signing out: %@", signOutError)
+                        }
+                    } label: {
+                        Text("LogOut")
+                    }
+                }
+            }
+            // ナビゲーションリンクの戻るボタンを非表示
+            .navigationBarBackButtonHidden(true)
+            // ログアウト時はログイン画面へ遷移する
+            .fullScreenCover(isPresented: $isPresented) {
+                LoginAuthView()
+            }
         }
     }
 }

@@ -8,75 +8,101 @@
 import SwiftUI
 import FirebaseAuth
 
+// 新規登録画面
 struct EntryAuthView: View {
-    
     @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
+    @State var isPresented: Bool = false
     
     var body: some View {
-        ZStack {
-            Color("Bg")
-                .ignoresSafeArea()
-            
-            VStack {
-                Text("Albumize")
-                    .font(.largeTitle)
-                    .foregroundColor(Color("Primary"))
-                    .padding(50)
+        NavigationStack {
+            ZStack {
+                Color("Bg")
+                    .ignoresSafeArea()
                 
-                VStack(spacing: 30) {
-                    Text("アカウントを作成")
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    Text("Albumize")
+                        .font(.largeTitle)
+                        .foregroundColor(Color("Primary"))
+                        .padding(50)
                     
-                    // 入力フィールド
-                    VStack(spacing: 20) {
-                        TextFieldView(title: "アカウント名", text: $name)
-                        TextFieldView(title: "メールアドレス", text: $email)
-                        SecureFieldView(title: "パスワード", text: $password)
-                    }
-                    
-                    // 登録ボタン
-                    Button {
-                        // createUser: ユーザーを作成する処理
-                        // 引数には登録するメールアドレスとパスワードを渡す
-                        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                            // result の中に user が格納されていれば登録成功
-                            if let user = result?.user {
-                                // ユーザー情報を編集（リクエストを構築）
-                                let request = user.createProfileChangeRequest()
-                                // 名前を設定
-                                request.displayName = name
-                                // 実際にリクエストを反映する（リクエストを実行）
-                                request.commitChanges { error in
-                                    // 編集成功
-                                    if error == nil {
-                                        // 確認メール送信
-                                        user.sendEmailVerification() { error in
-                                            if error == nil {
-                                                print("仮登録画面へ")
+                    VStack(spacing: 30) {
+                        Text("アカウントを作成")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        // 入力フィールド
+                        VStack(spacing: 20) {
+                            TextFieldView(title: "アカウント名", text: $name)
+                            TextFieldView(title: "メールアドレス", text: $email)
+                            SecureFieldView(title: "パスワード", text: $password)
+                        }
+                        
+                        // 登録ボタン
+                        Button {
+                            // createUser: ユーザーを作成する処理
+                            // 引数には登録するメールアドレスとパスワードを渡す
+                            Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                                // result の中に user が格納されていれば登録成功
+                                if let user = result?.user {
+                                    // ユーザー情報を編集（リクエストを構築）
+                                    let request = user.createProfileChangeRequest()
+                                    // 名前を設定
+                                    request.displayName = name
+                                    // 実際にリクエストを反映する（リクエストを実行）
+                                    request.commitChanges { error in
+                                        // 編集成功
+                                        if error == nil {
+                                            // 確認メール送信
+                                            user.sendEmailVerification() { error in
+                                                if error == nil {
+                                                    isPresented = true
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
+                        } label: {
+                            Text("新規登録")
+                                .padding()
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Primary"))
+                                .cornerRadius(10)
+                                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
                         }
-                    } label: {
-                        Text("新規登録")
-                            .padding()
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .background(Color("Primary"))
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
+                        
+                        NavigationLink {
+                            LoginAuthView()
+                        } label: {
+                            Text("ログインする")
+                                .padding()
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("Sub"))
+                                .cornerRadius(10)
+                                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
+                                .padding(.top)
+                        }
                     }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
+            // ナビゲーションリンクの戻るボタンを非表示
+            .navigationBarBackButtonHidden(true)
+            // 新規登録が完了した場合はメイン画面へ遷移
+//            .navigationDestination(isPresented: $isPresented) {
+//                ContentView()
+//            }
+            .fullScreenCover(isPresented: $isPresented) {
+                ContentView()
+            }
         }
     }
 }

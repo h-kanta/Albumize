@@ -6,21 +6,18 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContentView: View {
-    
-    @StateObject var photoData: PhotoViewModel
-    @StateObject var albumData: AlbumViewModel
-    @StateObject var photoPicker: PhotoPickerViewModel
-    
     var body: some View {
-        BottomTabView(photoData: .init(), albumData: .init(), photoPicker: .init())
+        MainView(photoData: .init(), albumData: .init(), photoPicker: .init())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+//        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+        ContentView()
     }
 }
 

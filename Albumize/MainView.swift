@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 // 下部タブバー
-struct BottomTabView: View {
+struct MainView: View {
     @StateObject var photoData: PhotoViewModel
     @StateObject var albumData: AlbumViewModel
     @StateObject var photoPicker: PhotoPickerViewModel
@@ -113,10 +113,9 @@ struct TabItem: View {
     }
 }
 
-struct BottomTabView_Previews: PreviewProvider {
+struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
-//        let photo = PhotoModel()
-//        ContentView(photoViewModel: .init(photo: photo))
-        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+//        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+        ContentView()
     }
 }

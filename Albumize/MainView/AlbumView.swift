@@ -67,9 +67,8 @@ struct AlbumView: View {
 
 struct AlbumView_Previews: PreviewProvider {
     static var previews: some View {
-//        let photo = PhotoModel()
-//        ContentView(photoViewModel: PhotoViewModel(photo: photo))
-        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+//        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+        ContentView()
     }
 }
 
@@ -118,6 +117,7 @@ struct FavoriteButtonView: View {
             .padding(8)
             .background(.white.opacity(0.8))
             .cornerRadius(10)
+            .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
             .onTapGesture {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.75)) {
                     album.isFavorited.toggle()

@@ -21,15 +21,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct AlbumizeApp: App {
-//    let photo = Photo()
-//    let album = Album()
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
-//            ContentView(photoViewModel: .init(photo: photo))
-            ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+//            ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+            LaunchScreenView()
         }
     }
 }

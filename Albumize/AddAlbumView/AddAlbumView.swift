@@ -116,7 +116,7 @@ struct AddAlbumView: View {
 
 struct AddAlbumView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
-//        AddAlbumView()
+//        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+        ContentView()
     }
 }
