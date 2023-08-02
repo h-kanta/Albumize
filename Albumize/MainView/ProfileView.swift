@@ -31,8 +31,6 @@ struct ProfileView: View {
                     }
                 }
             }
-            // ナビゲーションリンクの戻るボタンを非表示
-            .navigationBarBackButtonHidden(true)
             // ログアウト時はログイン画面へ遷移する
             .fullScreenCover(isPresented: $isPresented) {
                 LoginAuthView()

@@ -14,6 +14,8 @@ struct EntryAuthView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var isPresented: Bool = false
+    // 認証マネージャー
+    @State var authManager = AuthManager()
     
     var body: some View {
         NavigationStack {
@@ -28,7 +30,8 @@ struct EntryAuthView: View {
                         .padding(50)
                     
                     VStack(spacing: 30) {
-                        Text("アカウントを作成")
+                        Text("アカウント作成")
+                            .font(.title3)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
@@ -39,29 +42,13 @@ struct EntryAuthView: View {
                             SecureFieldView(title: "パスワード", text: $password)
                         }
                         
-                        // 登録ボタン
+                        // MARK: アカウント登録
                         Button {
-                            // createUser: ユーザーを作成する処理
-                            // 引数には登録するメールアドレスとパスワードを渡す
-                            Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                                // result の中に user が格納されていれば登録成功
-                                if let user = result?.user {
-                                    // ユーザー情報を編集（リクエストを構築）
-                                    let request = user.createProfileChangeRequest()
-                                    // 名前を設定
-                                    request.displayName = name
-                                    // 実際にリクエストを反映する（リクエストを実行）
-                                    request.commitChanges { error in
-                                        // 編集成功
-                                        if error == nil {
-                                            // 確認メール送信
-                                            user.sendEmailVerification() { error in
-                                                if error == nil {
-                                                    isPresented = true
-                                                }
-                                            }
-                                        }
-                                    }
+                            authManager.createUser(email: email, password: password, name: name)  { result in
+                                if result {
+                                    isPresented = true
+                                } else {
+                                    
                                 }
                             }
                         } label: {
@@ -75,10 +62,11 @@ struct EntryAuthView: View {
                                 .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
                         }
                         
+                        // 新規登録画面へ
                         NavigationLink {
                             LoginAuthView()
                         } label: {
-                            Text("ログインする")
+                            Text("登録済みの方はこちら")
                                 .padding()
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
@@ -120,7 +108,7 @@ struct TextFieldView: View {
     
     var body: some View {
         TextField(title, text: $text)
-            .padding()
+            .padding(15)
             .background(.white)
             .cornerRadius(10)
             .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
@@ -165,7 +153,7 @@ struct SecureFieldView: View {
                         }
                     }
             }
-            .padding()
+            .padding(15)
             .background(.white)
             .cornerRadius(10)
             .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)

@@ -13,6 +13,8 @@ struct LoginAuthView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var isPresented: Bool = false
+    // 認証マネージャー
+    @State var authManager = AuthManager()
     
     var body: some View {
         NavigationStack {
@@ -27,7 +29,8 @@ struct LoginAuthView: View {
                         .padding(50)
                     
                     VStack(spacing: 30) {
-                        Text("アカウントを作成")
+                        Text("ログイン")
+                            .font(.title3)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
@@ -37,12 +40,13 @@ struct LoginAuthView: View {
                             SecureFieldView(title: "パスワード", text: $password)
                         }
                         
-                        // ログインボタン
+                        // MARK: ログイン
                         Button {
-                            Auth.auth().signIn(withEmail: email, password: password) { result, error in
-                                if let user = result?.user {
-                                    print(user)
+                            authManager.Login(email: email, password: password) { result in
+                                if result {
                                     isPresented = true
+                                } else {
+                                    
                                 }
                             }
                         } label: {
@@ -56,7 +60,7 @@ struct LoginAuthView: View {
                                 .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
                         }
                         
-                        // 新規登録画面へ
+                        // ログイン画面へ
                         NavigationLink {
                             EntryAuthView()
                         } label: {
