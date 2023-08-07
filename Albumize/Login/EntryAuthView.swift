@@ -16,6 +16,11 @@ struct EntryAuthView: View {
     @State var isPresented: Bool = false
     // 認証マネージャー
     @State var authManager = AuthManager()
+    // エラーメッセージ
+    @State var errMessage: String = ""
+    
+    @Binding var entryAuthIsPresented: Bool
+    @State var isLoading: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -24,16 +29,13 @@ struct EntryAuthView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    Text("Albumize")
-                        .font(.largeTitle)
-                        .foregroundColor(Color("Primary"))
-                        .padding(50)
-                    
-                    VStack(spacing: 30) {
-                        Text("アカウント作成")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack(spacing: 40) {
+                        if errMessage != "" {
+                            Text(errMessage)
+                                .font(.title3)
+                                .foregroundColor(.red)
+                                .padding(.vertical)
+                        }
                         
                         // 入力フィールド
                         VStack(spacing: 20) {
@@ -44,46 +46,47 @@ struct EntryAuthView: View {
                         
                         // MARK: アカウント登録
                         Button {
+                            // ローディング表示
+                            withAnimation {
+                                isLoading = true
+                            }
+                            // エラーメッセージ初期化
+                            errMessage = ""
                             authManager.createUser(email: email, password: password, name: name)  { result in
                                 if result {
                                     isPresented = true
                                 } else {
-                                    
+                                    isLoading = false
+                                    errMessage = authManager.errMessage
                                 }
                             }
                         } label: {
-                            Text("新規登録")
-                                .padding()
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .background(Color("Primary"))
-                                .cornerRadius(10)
-                                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
-                        }
-                        
-                        // 新規登録画面へ
-                        NavigationLink {
-                            LoginAuthView()
-                        } label: {
-                            Text("登録済みの方はこちら")
-                                .padding()
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .background(Color("Sub"))
-                                .cornerRadius(10)
-                                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
-                                .padding(.top)
+                            ButtonView(text: "新規登録", color: Color("Sub"))
                         }
                     }
                     
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding()
+                
+                // ローディング
+                if isLoading {
+                    ProgressView("Loading...")
+                }
             }
-            // ナビゲーションリンクの戻るボタンを非表示
-            .navigationBarBackButtonHidden(true)
+            .navigationBarTitle("新規登録", displayMode: .inline)
+            
+            // ばつ
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Image(systemName: "xmark")
+                        .font(.title3)
+                        .onTapGesture {
+                            entryAuthIsPresented = false
+                        }
+                }
+            }
+            
             // 新規登録が完了した場合はメイン画面へ遷移
 //            .navigationDestination(isPresented: $isPresented) {
 //                ContentView()
@@ -97,7 +100,8 @@ struct EntryAuthView: View {
 
 struct EntryAuthView_Previews: PreviewProvider {
     static var previews: some View {
-        EntryAuthView()
+        @State var entryAuthIsPresented = true
+        EntryAuthView(entryAuthIsPresented: $entryAuthIsPresented)
     }
 }
 
@@ -143,7 +147,7 @@ struct SecureFieldView: View {
                 
                 Image(systemName: self.show ? "eye.slash.fill" : "eye.fill")
                     .font(.system(size: 17))
-                    .foregroundColor(Color("Primary"))
+                    .foregroundColor(.black)
                     .onTapGesture {
                         show.toggle()
                         if show {

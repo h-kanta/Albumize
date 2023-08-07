@@ -19,6 +19,13 @@ struct ProfileView: View {
                     .ignoresSafeArea()
                 
                 VStack{
+                    Circle()
+                        .fill(Color.black)
+                        .frame(width: 200, height: 100)
+                        .padding()
+                    
+                    
+                    
                     Button {
                         do {
                             try Auth.auth().signOut()
@@ -33,7 +40,7 @@ struct ProfileView: View {
             }
             // ログアウト時はログイン画面へ遷移する
             .fullScreenCover(isPresented: $isPresented) {
-                LoginAuthView()
+                StartUpView()
             }
         }
     }

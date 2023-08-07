@@ -14,7 +14,12 @@ struct LoginAuthView: View {
     @State var password: String = ""
     @State var isPresented: Bool = false
     // 認証マネージャー
-    @State var authManager = AuthManager()
+    @State var authManager: AuthManager = AuthManager()
+    // エラーメッセージ
+    @State var errMessage: String = ""
+    
+    @Binding var loginAuthIsPresented: Bool
+    @State var isLoading: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -23,17 +28,14 @@ struct LoginAuthView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    Text("Albumize")
-                        .font(.largeTitle)
-                        .foregroundColor(Color("Primary"))
-                        .padding(50)
-                    
-                    VStack(spacing: 30) {
-                        Text("ログイン")
+                    if errMessage != "" {
+                        Text(errMessage)
                             .font(.title3)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
+                            .foregroundColor(.red)
+                            .padding(.vertical)
+                    }
+                    
+                    VStack(spacing: 40) {
                         // 入力フィールド
                         VStack(spacing: 20) {
                             TextFieldView(title: "メールアドレス", text: $email)
@@ -42,46 +44,47 @@ struct LoginAuthView: View {
                         
                         // MARK: ログイン
                         Button {
+                            // ローディング表示
+                            withAnimation {
+                                isLoading = true
+                            }
+                            // エラーメッセージ初期化
+                            errMessage = ""
                             authManager.Login(email: email, password: password) { result in
                                 if result {
                                     isPresented = true
                                 } else {
-                                    
+                                   isLoading = false
+                                   errMessage = authManager.errMessage
                                 }
                             }
                         } label: {
-                            Text("ログイン")
-                                .padding()
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .background(Color("Primary"))
-                                .cornerRadius(10)
-                                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
-                        }
-                        
-                        // ログイン画面へ
-                        NavigationLink {
-                            EntryAuthView()
-                        } label: {
-                            Text("未登録の方はこちら")
-                                .padding()
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .background(Color("Sub"))
-                                .cornerRadius(10)
-                                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
-                                .padding(.top)
+                            ButtonView(text: "ログイン", color: Color("Primary"))
                         }
                     }
                     
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding()
+                
+                // ローディング
+                if isLoading {
+                    ProgressView("Loading...")
+                }
             }
-            // ナビゲーションリンクの戻るボタンを非表示
-            .navigationBarBackButtonHidden(true)
+            .navigationBarTitle("ログイン", displayMode: .inline)
+            
+            // ばつ
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Image(systemName: "xmark")
+                        .font(.title3)
+                        .onTapGesture {
+                            loginAuthIsPresented = false
+                        }
+                }
+            }
+            
             // ログインが完了した場合はメイン画面へ遷移
 //            .navigationDestination(isPresented: $isPresented) {
 //                ContentView()
@@ -95,6 +98,7 @@ struct LoginAuthView: View {
 
 struct LoginAuthView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginAuthView()
+        @State var loginAuthIsPresented = true
+        LoginAuthView(loginAuthIsPresented: $loginAuthIsPresented)
     }
 }

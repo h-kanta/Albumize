@@ -25,11 +25,10 @@ struct AlbumizeApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
             if Auth.auth().currentUser != nil {
                 ContentView()
             } else {
-                LoginAuthView()
+                StartUpView()
             }
         }
     }
