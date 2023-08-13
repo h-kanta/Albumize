@@ -20,6 +20,7 @@ struct LoginAuthView: View {
     
     @Binding var loginAuthIsPresented: Bool
     @State var isLoading: Bool = false
+    @State var showingAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -28,13 +29,6 @@ struct LoginAuthView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    if errMessage != "" {
-                        Text(errMessage)
-                            .font(.title3)
-                            .foregroundColor(.red)
-                            .padding(.vertical)
-                    }
-                    
                     VStack(spacing: 40) {
                         // 入力フィールド
                         VStack(spacing: 20) {
@@ -48,14 +42,15 @@ struct LoginAuthView: View {
                             withAnimation {
                                 isLoading = true
                             }
-                            // エラーメッセージ初期化
-                            errMessage = ""
                             authManager.Login(email: email, password: password) { result in
                                 if result {
                                     isPresented = true
                                 } else {
                                    isLoading = false
                                    errMessage = authManager.errMessage
+                                   showingAlert = true
+                                    
+                                   
                                 }
                             }
                         } label: {
@@ -73,7 +68,6 @@ struct LoginAuthView: View {
                 }
             }
             .navigationBarTitle("ログイン", displayMode: .inline)
-            
             // ばつ
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -84,11 +78,11 @@ struct LoginAuthView: View {
                         }
                 }
             }
-            
-            // ログインが完了した場合はメイン画面へ遷移
-//            .navigationDestination(isPresented: $isPresented) {
-//                ContentView()
-//            }
+            // アラート（エラーメッセージ）表示
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text(errMessage))
+            }
+            // メイン画面に遷移
             .fullScreenCover(isPresented: $isPresented) {
                 ContentView()
             }

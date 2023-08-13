@@ -21,6 +21,7 @@ struct EntryAuthView: View {
     
     @Binding var entryAuthIsPresented: Bool
     @State var isLoading: Bool = false
+    @State var showingAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -30,13 +31,6 @@ struct EntryAuthView: View {
                 
                 VStack {
                     VStack(spacing: 40) {
-                        if errMessage != "" {
-                            Text(errMessage)
-                                .font(.title3)
-                                .foregroundColor(.red)
-                                .padding(.vertical)
-                        }
-                        
                         // 入力フィールド
                         VStack(spacing: 20) {
                             TextFieldView(title: "アカウント名", text: $name)
@@ -58,6 +52,7 @@ struct EntryAuthView: View {
                                 } else {
                                     isLoading = false
                                     errMessage = authManager.errMessage
+                                    showingAlert = true
                                 }
                             }
                         } label: {
@@ -86,11 +81,11 @@ struct EntryAuthView: View {
                         }
                 }
             }
-            
-            // 新規登録が完了した場合はメイン画面へ遷移
-//            .navigationDestination(isPresented: $isPresented) {
-//                ContentView()
-//            }
+            // アラート（エラーメッセージ）表示
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text(errMessage))
+            }
+            // メイン画面に遷移
             .fullScreenCover(isPresented: $isPresented) {
                 ContentView()
             }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseStorage
 
 struct ProfileView: View {
     
@@ -24,7 +25,38 @@ struct ProfileView: View {
                         .frame(width: 200, height: 100)
                         .padding()
                     
-                    
+                    Button {
+                        let storage = Storage.storage()
+                        let reference = storage.reference()
+                        
+                        let path = "gs://[プロジェクト名].appspot.com/test/test.png"
+                        let imageRef = reference.child(path)
+                        
+                        let image = UIImage(named: "hari1")
+                        
+                        guard let data = image?.pngData() else {
+                            return
+                        }
+                        let uploadTask = imageRef.putData(data)
+                        
+                        var downloadURL: URL?
+                        uploadTask.observe(.success) { _ in
+                            imageRef.downloadURL { url, error in
+                                if let url = url {
+                                    downloadURL = url
+                                }
+                            }
+                        }
+                        
+                        uploadTask.observe(.failure) { snapshot in
+                            if let message = snapshot.error?.localizedDescription {
+                                print(message)
+                            }
+                        }
+                    } label: {
+                        Text("画像アップロード")
+                            .font(.largeTitle)
+                    }
                     
                     Button {
                         do {
