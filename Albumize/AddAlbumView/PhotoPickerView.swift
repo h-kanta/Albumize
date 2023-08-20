@@ -30,7 +30,7 @@ struct PhotoPickerView: View {
                             } label: {
                                 Text("キャンセル")
                                     .font(.callout)
-                                    .foregroundColor(Color("Primary"))
+                                    .foregroundColor(.black)
                             }
                             
                             Spacer()
@@ -39,7 +39,7 @@ struct PhotoPickerView: View {
                             if photoPicker.selectedPhotos.isEmpty {
                                 Text("次へ")
                                     .font(.callout)
-                                    .foregroundColor(Color("Primary").opacity(0.5))
+                                    .foregroundColor(.black.opacity(0.3))
                             } else {
                                 NavigationLink {
                                     AddAlbumView(photoPicker: photoPicker, albumData: alubmData)
@@ -52,7 +52,7 @@ struct PhotoPickerView: View {
                             }
                         }
                         .padding()
-                    
+
                         ScrollView() {
                             LazyVStack {
                                 LazyVGrid(columns: gridColumns, spacing: 1) {
@@ -101,12 +101,14 @@ struct PhotoPickerView: View {
                                                         .padding(3)
                                                 }
                                                 .onTapGesture {
-                                                    if let index = photoPicker.selectedPhotos.firstIndex(where: {
-                                                        $0.id == photo.id
-                                                    }) {
-                                                        photoPicker.selectedPhotos.remove(at: index)
-                                                        photoPicker.selectedPhotos.enumerated().forEach { photo in
-                                                            photoPicker.selectedPhotos[photo.offset].assetIndex = photo.offset
+                                                    withAnimation(.linear(duration: 0.3)) {
+                                                        if let index = photoPicker.selectedPhotos.firstIndex(where: {
+                                                            $0.id == photo.id
+                                                        }) {
+                                                            photoPicker.selectedPhotos.remove(at: index)
+                                                            photoPicker.selectedPhotos.enumerated().forEach { photo in
+                                                                photoPicker.selectedPhotos[photo.offset].assetIndex = photo.offset
+                                                            }
                                                         }
                                                     }
                                                     
@@ -254,16 +256,18 @@ struct PhotoPickerView: View {
         
         .onTapGesture {
             // タップ時、選択されていない写真は選択状態にする
-            if let selectedPhotoIndex {
-                photoPicker.selectedPhotos.remove(at: selectedPhotoIndex)
-                photoPicker.selectedPhotos.enumerated().forEach { photo in
-                    photoPicker.selectedPhotos[photo.offset].assetIndex = photo.offset
+            withAnimation(.linear(duration: 0.3)) {
+                if let selectedPhotoIndex {
+                    photoPicker.selectedPhotos.remove(at: selectedPhotoIndex)
+                    photoPicker.selectedPhotos.enumerated().forEach { photo in
+                        photoPicker.selectedPhotos[photo.offset].assetIndex = photo.offset
+                    }
+                } else {
+                    var newAsset = photoAsset
+                    newAsset.isSelected = true
+                    newAsset.assetIndex = photoPicker.selectedPhotos.count
+                    photoPicker.selectedPhotos.append(newAsset)
                 }
-            } else {
-                var newAsset = photoAsset
-                newAsset.isSelected = true
-                newAsset.assetIndex = photoPicker.selectedPhotos.count
-                photoPicker.selectedPhotos.append(newAsset)
             }
         }
     }

@@ -11,6 +11,7 @@ target 'Albumize' do
   pod 'FirebaseAuth'
   pod 'FirebaseCore'
   pod 'FirebaseStorage'
+  pod 'FirebaseFirestore'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

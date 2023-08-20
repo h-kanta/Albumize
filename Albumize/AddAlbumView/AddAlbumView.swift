@@ -36,7 +36,7 @@ struct AddAlbumView: View {
                                 Text("戻る")
                             }
                             .font(.callout)
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(.black)
                         }
                         
                         Spacer()
@@ -64,7 +64,7 @@ struct AddAlbumView: View {
                         } else {
                             Text("追加")
                                 .font(.callout)
-                                .foregroundColor(Color("Primary").opacity(0.5))
+                                .foregroundColor(.black.opacity(0.3))
                         }
                     }
                     .padding()
@@ -75,7 +75,8 @@ struct AddAlbumView: View {
                         Text("アルバム名を入力してください。")
                             .foregroundColor(.black.opacity(0.6))
                         TextField("アルバム名", text: $albumName)
-                            .padding()
+                            .font(.title2)
+                            .padding(10)
                             .background(.white)
                             .cornerRadius(10)
                             .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
@@ -109,7 +110,7 @@ struct AddAlbumView: View {
             // ナビゲーションリンクの戻るボタンを非表示
             .navigationBarBackButtonHidden(true)
             // ナビゲーションバーなどの色設定
-            .accentColor(Color("Primary").opacity(0.8))
+            .accentColor(.black.opacity(0.5))
         }
     }
 }

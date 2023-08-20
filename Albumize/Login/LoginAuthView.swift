@@ -49,8 +49,6 @@ struct LoginAuthView: View {
                                    isLoading = false
                                    errMessage = authManager.errMessage
                                    showingAlert = true
-                                    
-                                   
                                 }
                             }
                         } label: {

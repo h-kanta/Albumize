@@ -246,22 +246,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7C49FF7A-A3AE-46A4-9D93-77E5F0DCF9B1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Albumize/MainView/AlbumDetailView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "92E2DE3E-2746-4AE6-8BAD-FF35885C2DF2"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -333,8 +317,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "unknown"
             landmarkType = "0">
             <Locations>
@@ -411,8 +395,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "unknown"
             landmarkType = "0">
             <Locations>
@@ -489,8 +473,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "unknown"
             landmarkType = "0">
             <Locations>
@@ -898,8 +882,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "GridContent(photoAsset:)"
             landmarkType = "7">
          </BreakpointContent>

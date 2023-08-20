@@ -15,7 +15,6 @@
 		B752D62B2A7D4630009646F7 /* StartUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B752D62A2A7D4630009646F7 /* StartUpView.swift */; };
 		B753F1C92A56E54600D3027D /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B753F1C82A56E54600D3027D /* AlbumModel.swift */; };
 		B753F1CB2A56E65D00D3027D /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B753F1CA2A56E65D00D3027D /* AlbumViewModel.swift */; };
-		B75F57B12A5ECA4A00B56356 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75F57B02A5ECA4A00B56356 /* ImageLoader.swift */; };
 		B7655C352A792A6800A170F2 /* LoginAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7655C342A792A6800A170F2 /* LoginAuthView.swift */; };
 		B765B80D2A40988A00036CFD /* AlbumizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B765B80C2A40988A00036CFD /* AlbumizeApp.swift */; };
 		B765B80F2A40988A00036CFD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B765B80E2A40988A00036CFD /* ContentView.swift */; };
@@ -47,7 +46,6 @@
 		B752D62A2A7D4630009646F7 /* StartUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpView.swift; sourceTree = "<group>"; };
 		B753F1C82A56E54600D3027D /* AlbumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
 		B753F1CA2A56E65D00D3027D /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
-		B75F57B02A5ECA4A00B56356 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		B7655C342A792A6800A170F2 /* LoginAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAuthView.swift; sourceTree = "<group>"; };
 		B765B8092A40988A00036CFD /* Albumize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albumize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B765B80C2A40988A00036CFD /* AlbumizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumizeApp.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 				B7AC0E2C2A48248D00FCE7E5 /* PhotoViewModel.swift */,
 				B753F1CA2A56E65D00D3027D /* AlbumViewModel.swift */,
 				B7FA25352A5A850500B488CC /* PhotoPickerViewModel.swift */,
-				B75F57B02A5ECA4A00B56356 /* ImageLoader.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -270,6 +267,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		37E5B69E3845DB8EACFE2355 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -328,7 +326,6 @@
 				B7B08A032A4195AA00D8280B /* MainView.swift in Sources */,
 				B7AE17B72A5AD939008739F5 /* PhotoAssetModel.swift in Sources */,
 				B7B089FD2A41917900D8280B /* ProfileView.swift in Sources */,
-				B75F57B12A5ECA4A00B56356 /* ImageLoader.swift in Sources */,
 				B752D62B2A7D4630009646F7 /* StartUpView.swift in Sources */,
 				B7A9C0392A5A928200CB5753 /* PhotoPickerView.swift in Sources */,
 				B765B80D2A40988A00036CFD /* AlbumizeApp.swift in Sources */,

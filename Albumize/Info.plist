@@ -5,7 +5,9 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>Primary</string>
+		<string>Bg</string>
+		<key>UIImageName</key>
+		<string>Icon</string>
 		<key>UILaunchScreen</key>
 		<dict/>
 	</dict>

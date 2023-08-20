@@ -27,7 +27,6 @@ struct AlbumDetailView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             // アルバム名
                             Text(album.name)
-                                .foregroundColor(Color("Primary"))
                                 .font(.title3)
                                 .fontWeight(.bold)
                             // 作成日 - アルバム写真数

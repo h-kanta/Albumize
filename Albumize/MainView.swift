@@ -53,7 +53,7 @@ struct MainView: View {
         }
         
         // ナビゲーションバーなどの色設定
-        .accentColor(Color("Primary").opacity(0.8))
+        .accentColor(.black.opacity(0.5))
     }
     
     // カスタムタブバー

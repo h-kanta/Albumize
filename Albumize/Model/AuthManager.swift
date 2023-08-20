@@ -13,6 +13,16 @@ final class AuthManager {
     let auth = Auth.auth()
     var errMessage: String = ""
     
+    // MARK: ログイン済みか
+    func IsLogined(id: String, complition: @escaping (Bool) -> Void) {
+        if let userId = auth.currentUser?.uid {
+            print(userId)
+            complition(true)
+        } else {
+            complition(false)
+        }
+    }
+    
     // MARK: ログイン with email/password
     func Login(email: String, password: String, complition: @escaping (Bool) -> Void) {
         auth.signIn(withEmail: email, password: password) { result, error in

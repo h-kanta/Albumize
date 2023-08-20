@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseStorage
+import FirebaseFirestore
 
 // 新規登録画面
 struct EntryAuthView: View {
@@ -107,7 +109,8 @@ struct TextFieldView: View {
     
     var body: some View {
         TextField(title, text: $text)
-            .padding(15)
+            .font(.title2)
+            .padding(10)
             .background(.white)
             .cornerRadius(10)
             .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
@@ -141,7 +144,7 @@ struct SecureFieldView: View {
                     .autocapitalization(.none)
                 
                 Image(systemName: self.show ? "eye.slash.fill" : "eye.fill")
-                    .font(.system(size: 17))
+                    .font(.system(size: 20))
                     .foregroundColor(.black)
                     .onTapGesture {
                         show.toggle()
@@ -152,7 +155,8 @@ struct SecureFieldView: View {
                         }
                     }
             }
-            .padding(15)
+            .font(.title2)
+            .padding(10)
             .background(.white)
             .cornerRadius(10)
             .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)

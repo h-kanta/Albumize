@@ -17,12 +17,27 @@ struct StartUpView: View {
                 Color("Bg")
                     .ignoresSafeArea()
                 
-                VStack() {
-                    Text("Albumize")
-                        .font(.largeTitle)
-                        .foregroundColor(Color("Primary"))
-                        .padding(50)
+                VStack {
+                    // アイコン画像
+                    Image("Icon")
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.horizontal)
+                    //
+                    VStack(spacing: 5) {
+                        Text("ようこそ！")
+                            .font(.title3)
+                        HStack(spacing: 5) {
+                            Text("Albumize")
+                                .font(.title)
+                                .foregroundColor(Color("Primary"))
+                            Text("へ！")
+                                .font(.title3)
+                        }
+                    }
+                    .padding(.bottom)
                     
+                    // ログイン or 新規登録ボタン
                     VStack(spacing: 40) {
                         ButtonView(text: "ログインはこちらから", color: Color("Primary"))
                             .onTapGesture {
@@ -34,6 +49,7 @@ struct StartUpView: View {
                                 entryAuthIsPresented = true
                             }
                     }
+                    .padding(.top)
                     
                     Spacer()
                 }
