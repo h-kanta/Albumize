@@ -48,15 +48,5 @@ class AlbumViewModel: ObservableObject {
             )
         ]
     }
-    
-    func TodayPhotoSelected() {
-        
-    }
-    
-    
-    
-    
-    
-    
 }
 

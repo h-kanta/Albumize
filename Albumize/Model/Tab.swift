@@ -15,7 +15,7 @@ enum Tab: String, CaseIterable {
     case plan = "予定"
     case profile = "プロフィール"
     
-    //
+    // タブアイコン
     var systemImage: String {
         switch self {
         case .home:
@@ -30,8 +30,4 @@ enum Tab: String, CaseIterable {
             return "person.fill"
         }
     }
-    
-//    var index: Int {
-//        return Tab.allCases.firstIndex(of: self) ?? 0
-//    }
 }

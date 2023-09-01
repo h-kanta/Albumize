@@ -44,7 +44,15 @@ struct LoginAuthView: View {
                             }
                             authManager.Login(email: email, password: password) { result in
                                 if result {
-                                    isPresented = true
+                                    if let user = authManager.auth.currentUser {
+                                        if user.isEmailVerified {
+                                            isPresented = true
+                                        } else {
+                                            isLoading = false
+                                            errMessage = "メール認証がまだ完了していません。\n認証リンクがメールボックスに届いているか確認してください。"
+                                            showingAlert = true
+                                        }
+                                    }
                                 } else {
                                    isLoading = false
                                    errMessage = authManager.errMessage

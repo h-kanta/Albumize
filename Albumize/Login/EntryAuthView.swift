@@ -7,8 +7,6 @@
 
 import SwiftUI
 import FirebaseAuth
-import FirebaseStorage
-import FirebaseFirestore
 
 // 新規登録画面
 struct EntryAuthView: View {
@@ -18,6 +16,10 @@ struct EntryAuthView: View {
     @State var isPresented: Bool = false
     // 認証マネージャー
     @State var authManager = AuthManager()
+    // ストレージマネージャー
+    @State var storageManager = StorageManager()
+    // Firestoreマネージャー
+    @State var firestoreManager = FirestoreManager()
     // エラーメッセージ
     @State var errMessage: String = ""
     
@@ -50,7 +52,18 @@ struct EntryAuthView: View {
                             errMessage = ""
                             authManager.createUser(email: email, password: password, name: name)  { result in
                                 if result {
-                                    isPresented = true
+                                    // デフォルトのプロフィール画像をStorageに格納
+                                    if let userId = authManager.auth.currentUser?.uid {
+                                        let profilePath = "profile/\(userId)/profile.png"
+                                        storageManager.saveStorage(image: "DefaultProfile", path: profilePath) { result in
+                                            if result {
+                                                // ユーザー情報をFirestoreへ保存
+                                                firestoreManager.saveUserData(userId: userId, userName: name, email: email, imageURL: profilePath)
+                                                
+                                                isPresented = true
+                                            }
+                                        }
+                                    }
                                 } else {
                                     isLoading = false
                                     errMessage = authManager.errMessage

@@ -14,7 +14,7 @@ final class AuthManager {
     var errMessage: String = ""
     
     // MARK: ログイン済みか
-    func IsLogined(id: String, complition: @escaping (Bool) -> Void) {
+    func isLogined(id: String, complition: @escaping (Bool) -> Void) {
         if let userId = auth.currentUser?.uid {
             print(userId)
             complition(true)

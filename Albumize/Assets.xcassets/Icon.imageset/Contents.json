@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Albumize_icon.jpg",
+      "filename" : "Icon.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Albumize_icon 1.jpg",
+      "filename" : "Icon 1.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Albumize_icon 2.jpg",
+      "filename" : "Icon 2.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -23,19 +23,6 @@ struct StartUpView: View {
                         .resizable()
                         .scaledToFit()
                         .padding(.horizontal)
-                    //
-                    VStack(spacing: 5) {
-                        Text("ようこそ！")
-                            .font(.title3)
-                        HStack(spacing: 5) {
-                            Text("Albumize")
-                                .font(.title)
-                                .foregroundColor(Color("Primary"))
-                            Text("へ！")
-                                .font(.title3)
-                        }
-                    }
-                    .padding(.bottom)
                     
                     // ログイン or 新規登録ボタン
                     VStack(spacing: 40) {
@@ -60,7 +47,7 @@ struct StartUpView: View {
                 LoginAuthView(loginAuthIsPresented: $loginAuthIsPresented)
             }
             // 新規登録画面表示
-            .sheet(isPresented: $entryAuthIsPresented) {
+            .fullScreenCover(isPresented: $entryAuthIsPresented) {
                 EntryAuthView(entryAuthIsPresented: $entryAuthIsPresented)
             }
         }
