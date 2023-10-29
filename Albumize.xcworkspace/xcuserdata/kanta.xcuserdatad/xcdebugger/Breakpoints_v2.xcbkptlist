@@ -571,8 +571,8 @@
             filePath = "Albumize/AddAlbumView/AddAlbumView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -587,8 +587,8 @@
             filePath = "Albumize/AddAlbumView/AddAlbumView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -622,23 +622,37 @@
                   endingLineNumber = "74"
                   offsetFromSymbolStart = "1680">
                </Location>
+               <Location
+                  uuid = "1FC646D9-9C79-4F10-B8FB-F43C5F0D3DB6 - dfa7c59edb9c937b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Text&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, Swift.Optional&lt;SwiftUI.ProgressView&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.alert(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, content: () -&gt; SwiftUI.Alert) -&gt; some&gt;&gt;.0 in Albumize.AddAlbumView.body.getter : some"
+                  moduleName = "Albumize"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/AddAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "1976">
+               </Location>
+               <Location
+                  uuid = "1FC646D9-9C79-4F10-B8FB-F43C5F0D3DB6 - 36b1768a95c003c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Text&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, Swift.Optional&lt;SwiftUI.ProgressView&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.alert(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, content: () -&gt; SwiftUI.Alert) -&gt; some&gt;&gt;.0 in Albumize.AddAlbumView.body.getter : some"
+                  moduleName = "Albumize"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/AddAlbumView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "104">
+               </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0FBC08A4-CA3D-4D55-A10E-2285ED89C4DF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Albumize/AddAlbumView/AddAlbumView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "body"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -715,8 +729,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
             <Locations>
@@ -823,8 +837,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "getAlbumDocuments(userOrGroupCollection:userOrGroupId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -839,8 +853,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "getImageByUrl(imageUrls:)"
             landmarkType = "7">
             <Locations>
@@ -1394,8 +1408,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
             <Locations>
@@ -1472,8 +1486,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
             <Locations>
@@ -1550,8 +1564,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "getAlbumDirectory(url:)"
             landmarkType = "7">
             <Locations>
@@ -1658,8 +1672,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "getAlbumDirectory(url:)"
             landmarkType = "7">
             <Locations>
@@ -1766,8 +1780,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "getAlbumDirectory(url:)"
             landmarkType = "7">
             <Locations>
@@ -1829,8 +1843,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "getAlbumImageUrls(albumStorageItems:)"
             landmarkType = "7">
             <Locations>
@@ -1892,8 +1906,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "getAlbumImageUrls(albumStorageItems:)"
             landmarkType = "7">
             <Locations>
@@ -2000,8 +2014,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "getAlbumImageUrls(albumStorageItems:)"
             landmarkType = "7">
             <Locations>
@@ -2063,8 +2077,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "getAlbumDirectory(url:)"
             landmarkType = "7">
             <Locations>
@@ -2126,8 +2140,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
             <Locations>
@@ -2174,8 +2188,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2190,8 +2204,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2206,8 +2220,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2222,8 +2236,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2238,8 +2252,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "getAlbumDocuments(userOrGroupCollection:userOrGroupId:)"
             landmarkType = "7">
             <Locations>
@@ -2286,8 +2300,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "getAlbumDirectory(url:)"
             landmarkType = "7">
             <Locations>
@@ -2334,8 +2348,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "getAlbumImageUrls(albumStorageItems:)"
             landmarkType = "7">
             <Locations>
@@ -2382,8 +2396,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "setAlbumData(document:albumPhotos:)"
             landmarkType = "7">
             <Locations>
@@ -2430,8 +2444,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "getAlbumImageUrls(albumStorageItems:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2446,8 +2460,8 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "loadAlbums(collection:id:complition:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2462,9 +2476,217 @@
             filePath = "Albumize/ViewModel/AlbumViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "getAlbumImageUrls(albumStorageItems:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1C219051-36FA-493F-B9D6-ACDD4D24CDF0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "112D19A6-4BDA-47B7-ADC7-257C2C94A86A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "saveAlbumStorage(albumStorageUrl:photos:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "65139FA3-376A-4C6B-BEC1-E47962C6D7F8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "saveAlbumData(userGorupCollection:userGroupid:albumId:albumName:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7FA7830-D719-49A8-92AB-07996C09176E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E8F2B492-8D16-4E04-9118-B1120BB86FFD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3DC9C664-8F5D-4A91-8958-8102F3B170C5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "87D85472-EB95-4ABF-A915-D93AF3C25E3D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59ACF26C-62EB-46F0-BCBB-D1F53F82CDDC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "364639B4-74D7-41BF-9430-AFC83071F337"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "68C3426B-3B08-4F61-827E-5F434EFB9A78"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/AddAlbumView/AddAlbumView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23100429-D170-4147-86E1-71B871D74762"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0382076C-D7EF-4541-9209-2FD28CB35CE8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "20E4648E-6AF2-44A2-A165-70030F0F0284"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Albumize/ViewModel/AlbumViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "createAlbum(albumStorageUrl:albumPhotos:collection:id:albumId:name:complition:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

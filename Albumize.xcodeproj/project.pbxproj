@@ -14,8 +14,6 @@
 		B735FC0D2A763D9200D78ADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B735FC0C2A763D9200D78ADC /* GoogleService-Info.plist */; };
 		B73890142A91AD5E00E1595F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73890132A91AD5E00E1595F /* UserModel.swift */; };
 		B73890162A922CCC00E1595F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73890152A922CCC00E1595F /* UserViewModel.swift */; };
-		B73890182A92303D00E1595F /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73890172A92303D00E1595F /* StorageManager.swift */; };
-		B738901A2A923CF000E1595F /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73890192A923CF000E1595F /* FirestoreManager.swift */; };
 		B73E79B02A485B77007C5C11 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73E79AF2A485B77007C5C11 /* PhotoView.swift */; };
 		B7434AC12AA2D05D00BA65FB /* EntryProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7434AC02AA2D05D00BA65FB /* EntryProfileInfoView.swift */; };
 		B752D62B2A7D4630009646F7 /* StartUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B752D62A2A7D4630009646F7 /* StartUpView.swift */; };
@@ -52,8 +50,6 @@
 		B735FC0C2A763D9200D78ADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B73890132A91AD5E00E1595F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B73890152A922CCC00E1595F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
-		B73890172A92303D00E1595F /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		B73890192A923CF000E1595F /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		B73E79AF2A485B77007C5C11 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		B7434AC02AA2D05D00BA65FB /* EntryProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryProfileInfoView.swift; sourceTree = "<group>"; };
 		B752D62A2A7D4630009646F7 /* StartUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpView.swift; sourceTree = "<group>"; };
@@ -211,8 +207,6 @@
 				B753F1C82A56E54600D3027D /* AlbumModel.swift */,
 				B7AE17B62A5AD939008739F5 /* PhotoAssetModel.swift */,
 				B77DBEB32A7A7E2500DCC3CA /* AuthManager.swift */,
-				B73890172A92303D00E1595F /* StorageManager.swift */,
-				B73890192A923CF000E1595F /* FirestoreManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,7 +330,6 @@
 			files = (
 				B7814C702A5112FC0072251E /* PhotoModel.swift in Sources */,
 				B73890162A922CCC00E1595F /* UserViewModel.swift in Sources */,
-				B73890182A92303D00E1595F /* StorageManager.swift in Sources */,
 				B7AC0E2D2A48248D00FCE7E5 /* PhotoViewModel.swift in Sources */,
 				B7B089F92A41916100D8280B /* AlbumView.swift in Sources */,
 				B7655C352A792A6800A170F2 /* LoginAuthView.swift in Sources */,
@@ -347,7 +340,6 @@
 				B73890142A91AD5E00E1595F /* UserModel.swift in Sources */,
 				B706214F2A45D512007D7845 /* AlbumDetailView.swift in Sources */,
 				B753F1C92A56E54600D3027D /* AlbumModel.swift in Sources */,
-				B738901A2A923CF000E1595F /* FirestoreManager.swift in Sources */,
 				B72DAB282AA4A579000DA2B1 /* BirthDayPickerView.swift in Sources */,
 				B7DC364D2A76953600BCD45E /* EntryAuthView.swift in Sources */,
 				B7B08A032A4195AA00D8280B /* MainView.swift in Sources */,

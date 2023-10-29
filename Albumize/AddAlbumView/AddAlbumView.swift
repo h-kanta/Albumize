@@ -23,6 +23,8 @@ struct AddAlbumView: View {
     @State var errMessage: String = ""
     // アラート表示フラグ
     @State var isShowingAlert: Bool = false
+    // ローディング
+    @State var isLoading: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -51,16 +53,9 @@ struct AddAlbumView: View {
                         // 追加ボタン
                         if albumName != "" {
                             Button {
-//                                albumData.albums.append(
-//                                    Album(
-//                                        name: albumName,
-//                                        createDate: "2023年7月18日",
-//                                        thumbnail: Image(uiImage: photoPicker.selectedPhotos[0].thumbnail!),
-//                                        photos: photos
-//                                    ))
-//                                photoPicker.selectedPhotos.removeAll()
-//                                photoPicker.isPhotoPickerShowing = false
-                                
+                                withAnimation {
+                                    isLoading = true
+                                }
                                 // フォルダ名を取得
                                 let storageName = userData.userInfo.isInGroup ? "groups" : "users"
                                 // グループID or ユーザーID取得
@@ -71,22 +66,13 @@ struct AddAlbumView: View {
                                 let storageUrl = "/\(storageName)/\(id)/albums/\(albumId)/"
                                 
                                 // MARK: アルバム写真を保存
-                                albumData.saveAlbumImage(profileImageurl: storageUrl,
-                                                         photos: photoPicker.selectedPhotos) { result in
+                                albumData.createAlbum(albumStorageUrl: storageUrl, albumPhotos: photoPicker.selectedPhotos, collection: storageName, id: id, albumId: albumId, name: albumName) { result in
                                     if result {
-                                        // MARK: アルバムを作成
-                                        albumData.saveAlbumData(userGorupCollection: storageName, userGroupid: id, albumId: albumId, albumName: albumName)
-                                            
-                                            
-                                                print(albumData.albums)
-                                                // 選択した写真をクリア
-                                                photoPicker.selectedPhotos.removeAll()
-                                                // アルバム作成画面を閉じる
-                                                photoPicker.isPhotoPickerShowing = false
-                                            
-                                    } else {
-                                        errMessage = "写真の保存に失敗しました。"
-                                        isShowingAlert = true
+                                        isLoading = false
+                                        // 選択した写真をクリア
+                                        photoPicker.selectedPhotos.removeAll()
+                                        // アルバム作成画面を閉じる
+                                        photoPicker.isPhotoPickerShowing = false
                                     }
                                 }
                                 
@@ -142,6 +128,10 @@ struct AddAlbumView: View {
                     }
                     .padding()
                     
+                }
+                // ローディング
+                if isLoading {
+                    ProgressView("Loading...")
                 }
             }
             // ナビゲーションリンクの戻るボタンを非表示
