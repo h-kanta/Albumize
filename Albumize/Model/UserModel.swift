@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct User: Identifiable {
-    let id: UUID = .init()
+    var id: String = ""
     var name: String = ""
+    var gender: String = ""
     var email: String = ""
-    var imageURL: String = ""
-    var createdAt: Date = .init()
-    var updatedAt: Date = .init()
+    var birthday: String = ""
+    var profileImageUrl: String = ""
+    var isInGroup: Bool = false
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
 }
+

@@ -6,39 +6,43 @@
 //
 
 import SwiftUI
-import PhotosUI
 
-// 下部タブバー
+// メイン画面
 struct MainView: View {
+    @StateObject var userData: UserViewModel
     @StateObject var photoData: PhotoViewModel
     @StateObject var albumData: AlbumViewModel
     @StateObject var photoPicker: PhotoPickerViewModel
+    // 認証マネージャー
+    @State var authManager = AuthManager()
     // タブ
     @State var activeTab: Tab = .home
+    // ローディング
+    @State var isLoading: Bool = false
     
     var body: some View {
         ZStack {
             TabView(selection: $activeTab) {
+                // ホーム画面
                 HomeView(photoData: photoData, albumData: albumData)
                     .tag(Tab.home)
                 //                    .toolbar(.hidden, for: .tabBar)
-                
-                AlbumView(photoData: photoData, albumData: albumData)
+                // アルバム画面
+                AlbumView(photoData: photoData, albumData: albumData, userData: userData)
                     .tag(Tab.album)
-                
+                // 予定画面
                 PlanView()
                     .tag(Tab.plan)
-                
+                // プロフィール画面１
                 ProfileView()
                     .tag(Tab.profile)
             }
-            
+
             // 下部タブバー
             CustomTabBar()
-                .padding(.vertical, 20)
+                .padding(.vertical, 23)
                 .background(Color.white)
                 .cornerRadius(8)
-            //                .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 0)
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .ignoresSafeArea()
             
@@ -46,14 +50,39 @@ struct MainView: View {
             if photoData.isSelectedPhoto {
                 PhotoView(photoData: photoData)
             }
+            
+            // ローディング
+            if isLoading {
+                ProgressView("Loading...")
+            }
         }
-        // アルバム追加
+        // アルバム追加画面に遷移
         .fullScreenCover(isPresented: $photoPicker.isPhotoPickerShowing) {
-            PhotoPickerView(alubmData: albumData, photoPicker: photoPicker)
+            PhotoPickerView(alubmData: albumData,
+                            photoPicker: photoPicker,
+                            userData: userData)
         }
-        
         // ナビゲーションバーなどの色設定
         .accentColor(.black.opacity(0.5))
+        .onAppear {
+            // ローディング表示
+            withAnimation {
+                isLoading = true
+            }
+            // ユーザー情報取得
+            userData.loadUserInfo() { result in
+                if (result) {
+                    // アルバム情報取得
+                    let collection = userData.userInfo.isInGroup ? "groups" : "users"
+                    let id = userData.userInfo.isInGroup ? "" : userData.userInfo.id
+                    albumData.loadAlbums(collection: collection, id: id) { result in
+                        if result {
+                            isLoading = false
+                        }
+                    }
+                }
+            }
+        }
     }
     
     // カスタムタブバー
@@ -116,6 +145,7 @@ struct TabItem: View {
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
 //        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
-        ContentView()
+        //ContentView()
+        MainView(userData: .init() ,photoData: .init(), albumData: .init(), photoPicker: .init())
     }
 }

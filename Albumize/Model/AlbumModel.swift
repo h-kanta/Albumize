@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct Album: Identifiable {
-    let id: UUID = UUID()
-    var name: String = ""
-    var createDate: String = ""
-    var thumbnail: Image = .init("")
-    var isFavorited: Bool = false
+    var id: String = ""
+    var albumName: String = ""
+    var albumUrl: String = ""
     var photos: [Photo] = []
+    var isFavorited: Bool = false
+    var createdAt: Date = Date()
+    var updatedAt: Date = Date()
 }

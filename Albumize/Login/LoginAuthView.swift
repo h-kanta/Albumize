@@ -12,7 +12,7 @@ import FirebaseAuth
 struct LoginAuthView: View {
     @State var email: String = ""
     @State var password: String = ""
-    @State var isPresented: Bool = false
+    @State var nextPageActive: Bool = false
     // 認証マネージャー
     @State var authManager: AuthManager = AuthManager()
     // エラーメッセージ
@@ -20,11 +20,12 @@ struct LoginAuthView: View {
     
     @Binding var loginAuthIsPresented: Bool
     @State var isLoading: Bool = false
-    @State var showingAlert: Bool = false
+    @State var isShowingAlert: Bool = false
     
     var body: some View {
         NavigationStack {
             ZStack {
+                // 背景色
                 Color("Bg")
                     .ignoresSafeArea()
                 
@@ -32,7 +33,7 @@ struct LoginAuthView: View {
                     VStack(spacing: 40) {
                         // 入力フィールド
                         VStack(spacing: 20) {
-                            TextFieldView(title: "メールアドレス", text: $email)
+                            TextFieldView(title: "メールアドレス", text: $email, disabled: false)
                             SecureFieldView(title: "パスワード", text: $password)
                         }
                         
@@ -42,21 +43,23 @@ struct LoginAuthView: View {
                             withAnimation {
                                 isLoading = true
                             }
-                            authManager.Login(email: email, password: password) { result in
-                                if result {
-                                    if let user = authManager.auth.currentUser {
-                                        if user.isEmailVerified {
-                                            isPresented = true
+                            // ログインする
+                            authManager.Login(email: email, password: password) { loginResult in
+                                if loginResult {
+                                    // 認証完了済みかどうか
+                                    authManager.isRegistrationComplete { authResult in
+                                        if authResult {
+                                            nextPageActive = true
                                         } else {
                                             isLoading = false
                                             errMessage = "メール認証がまだ完了していません。\n認証リンクがメールボックスに届いているか確認してください。"
-                                            showingAlert = true
+                                            isShowingAlert = true
                                         }
                                     }
                                 } else {
                                    isLoading = false
                                    errMessage = authManager.errMessage
-                                   showingAlert = true
+                                   isShowingAlert = true
                                 }
                             }
                         } label: {
@@ -85,11 +88,11 @@ struct LoginAuthView: View {
                 }
             }
             // アラート（エラーメッセージ）表示
-            .alert(isPresented: $showingAlert) {
+            .alert(isPresented: $isShowingAlert) {
                 Alert(title: Text(errMessage))
             }
             // メイン画面に遷移
-            .fullScreenCover(isPresented: $isPresented) {
+            .fullScreenCover(isPresented: $nextPageActive) {
                 ContentView()
             }
         }

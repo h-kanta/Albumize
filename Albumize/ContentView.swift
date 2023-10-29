@@ -10,7 +10,15 @@ import FirebaseAuth
 
 struct ContentView: View {
     var body: some View {
-        MainView(photoData: .init(), albumData: .init(), photoPicker: .init())
+        if let user = Auth.auth().currentUser {
+            if user.isEmailVerified {
+                MainView(userData: .init() ,photoData: .init(), albumData: .init(), photoPicker: .init())
+            } else {
+                StartUpView()
+            }
+        } else {
+            StartUpView()
+        }
     }
 }
 

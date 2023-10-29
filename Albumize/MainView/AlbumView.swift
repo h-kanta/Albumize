@@ -12,6 +12,7 @@ struct AlbumView: View {
     
     @StateObject var photoData: PhotoViewModel
     @StateObject var albumData: AlbumViewModel
+    @StateObject var userData: UserViewModel
     
     @State var searchText = ""
     
@@ -59,7 +60,7 @@ struct AlbumView: View {
             .searchable(
                 text: $searchText,
                 placement: .navigationBarDrawer(displayMode: .always),
-                prompt: Text("アルバムを選択")
+                prompt: Text("アルバムを検索")
             )
         }
     }
@@ -68,7 +69,8 @@ struct AlbumView: View {
 struct AlbumView_Previews: PreviewProvider {
     static var previews: some View {
 //        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
-        ContentView()
+        //ContentView()
+        MainView(userData: .init() ,photoData: .init(), albumData: .init(), photoPicker: .init())
     }
 }
 
@@ -77,32 +79,34 @@ struct AlbumCardView: View {
     @Binding var album: Album
     var body: some View {
         ZStack {
-            album.thumbnail
-                .resizable()
-                .scaledToFill()
-                .frame(height: 180, alignment: .center)
-                .brightness(-0.3) // 明るさを調整
-                .opacity(0.8) // 透明度を調整
-                .cornerRadius(10)
-            
-            VStack(alignment: .leading) {
-                // アルバム名
-                Text(album.name)
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .padding(.bottom, 3)
-                // 作成日 - アルバム写真数
-                HStack(spacing: 3) {
-                    Text(album.createDate)
-                    Text("-")
-                    Text("\(album.photos.count) 写真")
+            if album.photos.count != 0 {
+                album.photos[0].image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 180, alignment: .center)
+                    .brightness(-0.3) // 明るさを調整
+                    .opacity(0.8) // 透明度を調整
+                    .cornerRadius(10)
+                
+                VStack(alignment: .leading) {
+                    // アルバム名
+                    Text(album.albumName)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 3)
+                    // 作成日 - アルバム写真数
+                    HStack(spacing: 3) {
+                        Text(album.createdAt.description)
+                        Text("-")
+                        Text("\(album.photos.count) 写真")
+                    }
+                    .font(.caption)
                 }
-                .font(.caption)
+                .padding()
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                .padding()
             }
-            .padding()
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-            .padding()
         }
     }
 }

@@ -13,7 +13,8 @@ struct StartUpView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
+            ZStack {                                              
+                // 背景色
                 Color("Bg")
                     .ignoresSafeArea()
                 
@@ -60,6 +61,7 @@ struct StartUpView_Previews: PreviewProvider {
     }
 }
 
+// ボタン
 struct ButtonView: View {
     var text: String
     var color: Color

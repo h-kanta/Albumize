@@ -13,7 +13,7 @@ enum Tab: String, CaseIterable {
     case album = "アルバム"
     case plus = ""
     case plan = "予定"
-    case profile = "プロフィール"
+    case profile = "アカウント"
     
     // タブアイコン
     var systemImage: String {

@@ -9,195 +9,134 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPickerView: View {
-    //
     @StateObject var alubmData: AlbumViewModel
     @StateObject var photoPicker: PhotoPickerViewModel
-    //
+    @StateObject var userData: UserViewModel
+    // グリッド
     @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 1), count: 4)
     // デバイスサイズ
     let deviceSize = UIScreen.main.bounds.size
+    
     var body: some View {
         NavigationStack {
             ZStack {
+                // 背景
                 Color("Bg")
                     .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                        HStack {
-                            // キャンセルボタン
-                            Button {
-                                photoPicker.isPhotoPickerShowing = false
+                    HStack {
+                        // キャンセルボタン
+                        Button {
+                            photoPicker.isPhotoPickerShowing = false
+                        } label: {
+                            Text("キャンセル")
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        }
+                        
+                        Spacer()
+                        
+                        // 次へボタン
+                        if photoPicker.selectedPhotos.isEmpty {
+                            Text("次へ")
+                                .font(.callout)
+                                .foregroundColor(.black.opacity(0.3))
+                        } else {
+                            NavigationLink {
+                                AddAlbumView(photoPicker: photoPicker,
+                                             albumData: alubmData,
+                                             userData: userData)
                             } label: {
-                                Text("キャンセル")
-                                    .font(.callout)
-                                    .foregroundColor(.black)
-                            }
-                            
-                            Spacer()
-                            
-                            // 次へボタン
-                            if photoPicker.selectedPhotos.isEmpty {
                                 Text("次へ")
                                     .font(.callout)
-                                    .foregroundColor(.black.opacity(0.3))
-                            } else {
-                                NavigationLink {
-                                    AddAlbumView(photoPicker: photoPicker, albumData: alubmData)
-                                } label: {
-                                    Text("次へ")
-                                        .font(.callout)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color("Primary"))
-                                }
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color("Primary"))
                             }
                         }
-                        .padding()
+                    }
+                    .padding()
 
-                        ScrollView() {
-                            LazyVStack {
-                                LazyVGrid(columns: gridColumns, spacing: 1) {
-                                    ForEach($photoPicker.fetchedPhotos) { $photoAsset in
-                                        GridContent(photoAsset: photoAsset)
-                                        //                                if let thumbnail = photoAsset.thumbnail {
-                                        //                                    UIViewControllerImageView(image: thumbnail)
-                                            .onAppear {
-                                                if photoAsset.thumbnail == nil {
-                                                    let manager = PHCachingImageManager.default()
-                                                    manager.requestImage(for: photoAsset.asset, targetSize: CGSize(width: photoAsset.asset.pixelWidth, height: photoAsset.asset.pixelHeight), contentMode: .aspectFill, options: nil) { photo,
-                                                        _ in
-                                                        photoAsset.thumbnail = photo
+                    ScrollView() {
+                        // 写真ライブラリグリッド
+                        LazyVGrid(columns: gridColumns, spacing: 1) {
+                            ForEach($photoPicker.fetchedPhotos) { $photoAsset in
+                                GridContent(photoAsset: photoAsset)
+                                //                                if let thumbnail = photoAsset.thumbnail {
+                                //                                    UIViewControllerImageView(image: thumbnail)
+                                    .onAppear {
+                                        if photoAsset.thumbnail == nil {
+                                            let manager = PHCachingImageManager.default()
+                                            manager.requestImage(for: photoAsset.asset, targetSize: CGSize(width: photoAsset.asset.pixelWidth, height: photoAsset.asset.pixelHeight), contentMode: .aspectFill, options: nil) { photo,
+                                                _ in
+                                                photoAsset.thumbnail = photo
+                                            }
+                                        }
+                                    }
+                            }
+                        }
+                    }
+                    
+                    // 写真選択ガイド
+                    VStack {
+                        // 選択数テキスト
+                        Text(photoPicker.selectedPhotos.isEmpty ? "写真を選択" :
+                                "\(photoPicker.selectedPhotos.count)個を選択中")
+                        .font(.callout)
+                        .fontWeight(.semibold)
+
+                        // 選択済みの写真一覧
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10) {
+                                ForEach(photoPicker.selectedPhotos) { photo in
+                                    if let thumbnail = photo.thumbnail {
+                                        Image(uiImage: thumbnail)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 60, height: 60)
+                                            .cornerRadius(10)
+                                            // ×ボタン
+                                            .overlay(alignment: .topTrailing) {
+                                                Image(systemName: "xmark")
+                                                    .font(.system(size: 10))
+                                                    .frame(width: 15, height: 15)
+                                                    .foregroundColor(.white)
+                                                    .background(.black)
+                                                    .clipShape(Circle())
+                                                    .padding(3)
+                                            }
+                                            .onTapGesture {
+                                                withAnimation(.linear(duration: 0.3)) {
+                                                    if let index = photoPicker.selectedPhotos.firstIndex(where: {
+                                                        $0.id == photo.id
+                                                    }) {
+                                                        photoPicker.selectedPhotos.remove(at: index)
+                                                        photoPicker.selectedPhotos.enumerated().forEach { photo in
+                                                            photoPicker.selectedPhotos[photo.offset].assetIndex = photo.offset
+                                                        }
                                                     }
                                                 }
+                                                
                                             }
                                     }
                                 }
                             }
+                            .padding(3)
+                            .padding(.bottom)
                         }
-                        
-                        // 写真選択ガイド
-                        VStack {
-                            Text(photoPicker.selectedPhotos.isEmpty ? "写真を選択" :
-                                    "\(photoPicker.selectedPhotos.count)個を選択中")
-                            .font(.callout)
-                            .fontWeight(.semibold)
-
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 10) {
-                                    ForEach(photoPicker.selectedPhotos) { photo in
-                                        if let thumbnail = photo.thumbnail {
-                                            Image(uiImage: thumbnail)
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 60, height: 60)
-                                                .cornerRadius(10)
-                                                // ばつボタン
-                                                .overlay(alignment: .topTrailing) {
-                                                    Image(systemName: "xmark")
-                                                        .font(.system(size: 10))
-                                                        .frame(width: 15, height: 15)
-                                                        .foregroundColor(.white)
-                                                        .background(.black)
-                                                        .clipShape(Circle())
-                                                        .padding(3)
-                                                }
-                                                .onTapGesture {
-                                                    withAnimation(.linear(duration: 0.3)) {
-                                                        if let index = photoPicker.selectedPhotos.firstIndex(where: {
-                                                            $0.id == photo.id
-                                                        }) {
-                                                            photoPicker.selectedPhotos.remove(at: index)
-                                                            photoPicker.selectedPhotos.enumerated().forEach { photo in
-                                                                photoPicker.selectedPhotos[photo.offset].assetIndex = photo.offset
-                                                            }
-                                                        }
-                                                    }
-                                                    
-                                                }
-                                        }
-                                    }
-                                }
-                                .padding(3)
-                                .padding(.bottom)
-                            }
-                        }
-                        .padding()
-                        .background(.white)
                     }
-                    .shadow(color: Color.black.opacity(0.03), radius: 4, x: 0, y: -3)
-                // キャンセルボタン
-    //            .toolbar {
-    //                ToolbarItem(placement: .navigationBarLeading) {
-    //                    Button {
-    //                        photoPicker.isPhotoPickerShowing = false
-    //                    } label: {
-    //                        Text("キャンセル")
-    //                            .font(.callout)
-    //                            .foregroundColor(Color("Primary"))
-    //                    }
-    //                }
-    //            }
-                
-                // 次へボタン
-    //            .toolbar() {
-    //                ToolbarItem(placement: .navigationBarTrailing) {
-    //                    NavigationLink {
-    //                        AddAlbumView(photoPicker: photoPicker, albumData: alubmData)
-    //                    } label: {
-    //                        Text("次へ")
-    //                            .font(.callout)
-    //                            .foregroundColor(Color("Primary"))
-    //                    }
-    //                }
-    //            }
-                
-                // 下部選択写真表示
-    //            .overlay(alignment: .bottom) {
-    //                VStack {
-    //                    Text(photoPicker.selectedPhotos.isEmpty ? "写真を選択" :
-    //                            "\(photoPicker.selectedPhotos.count)個を選択中")
-    //                    .font(.callout)
-    //                    .fontWeight(.semibold)
-    //
-    //                    ScrollView(.horizontal, showsIndicators: false) {
-    //                        HStack(spacing: 10) {
-    //                            ForEach(photoPicker.selectedPhotos) { photo in
-    //                                if let thumbnail = photo.thumbnail {
-    //                                    // 最初の画像はサムネイルになるため、その印に枠線を付ける
-    //                                    if photoPicker.selectedPhotos[0].thumbnail == thumbnail {
-    //                                        Image(uiImage: thumbnail)
-    //                                            .resizable()
-    //                                            .scaledToFill()
-    //                                            .frame(width: 50, height: 50)
-    //                                            .cornerRadius(10)
-    //                                            .overlay(
-    //                                               RoundedRectangle(cornerRadius: 10)
-    //                                                   .stroke(Color("Primary"), lineWidth: 3)
-    //                                            )
-    //                                    } else {
-    //                                        Image(uiImage: thumbnail)
-    //                                            .resizable()
-    //                                            .scaledToFill()
-    //                                            .frame(width: 50, height: 50)
-    //                                            .cornerRadius(10)
-    //                                    }
-    //                                }
-    //                            }
-    //                        }
-    //                        .padding(3)
-    //                        .padding(.bottom)
-    //                    }
-    //                }
-    //                .padding()
-    //                .background(Color("Bg"))
-    //                .shadow(color: Color.black.opacity(0.10), radius: 6, x: 0, y: -2)
-    //            }
+                    .padding()
+                    .background(.white)
+                    
+                }
+                .shadow(color: Color.black.opacity(0.03), radius: 4, x: 0, y: -3)
                 .edgesIgnoringSafeArea(.bottom)
             }
         }
         .accentColor(Color("Primary").opacity(0.8))
     }
     
-    // グリッドライブラリ写真
+    // 写真ライブラリグリッド
     @ViewBuilder
     func GridContent(photoAsset: PhotoAssetModel) -> some View {
         // 選択中の写真の場合は、写真のインデックスを取得
@@ -314,9 +253,10 @@ struct PhotoPickerView: View {
 //    }
 //}
 
+// MARK: プレビュー
 struct PhotoPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoPickerView(alubmData: .init(), photoPicker: .init())
+        PhotoPickerView(alubmData: .init(), photoPicker: .init(), userData: .init())
     }
 }
 

@@ -23,6 +23,26 @@ final class AuthManager {
         }
     }
     
+    // MARK: 認証が完了しているか
+    func isRegistrationComplete (complition: @escaping (Bool) -> Void) {
+        if let user = auth.currentUser {
+            if user.isEmailVerified {
+                print("認証完了済み")
+                complition(true)
+            } else {
+                print("認証未完了")
+                complition(false)
+            }
+        }
+    }
+    
+    // MARK: ユーザIDを取得
+//    func getUserId() -> String? {
+//        if let user = auth.currentUser {
+//            return String(user.uid)
+//        }
+//    }
+    
     // MARK: ログイン with email/password
     func Login(email: String, password: String, complition: @escaping (Bool) -> Void) {
         auth.signIn(withEmail: email, password: password) { result, error in
@@ -40,7 +60,7 @@ final class AuthManager {
     }
     
     // MARK: 新規登録
-    func createUser(email: String, password: String, name: String, complition: @escaping (Bool) -> Void) {
+    func createUser(email: String, password: String, complition: @escaping (Bool) -> Void) {
         // createUser: ユーザーを作成する処理
         // 引数には登録するメールアドレスとパスワードを渡す
         auth.createUser(withEmail: email, password: password) { result, error in
@@ -50,7 +70,7 @@ final class AuthManager {
                     // ユーザー情報を編集（リクエストを構築）
                     let request = user.createProfileChangeRequest()
                     // 名前を設定
-                    request.displayName = name
+//                    request.displayName = name
                     // 実際にリクエストを反映する（リクエストを実行）
                     request.commitChanges { error in
                         // 編集成功
@@ -58,6 +78,7 @@ final class AuthManager {
                             // 確認メール送信
                             user.sendEmailVerification() { error in
                                 if error == nil {
+                                    print("認証メール送信")
                                     complition(true)
                                 } else {
                                     self.setErrorMessage(error)
@@ -77,6 +98,7 @@ final class AuthManager {
         }
     }
     
+    // エラーメッセージ
     func setErrorMessage(_ error: Error?) {
         if let error = error as NSError? {
             if let errorCode = AuthErrorCode.Code(rawValue: error.code) {

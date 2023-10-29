@@ -13,7 +13,6 @@ class PhotoPickerViewModel: ObservableObject {
     @Published var fetchedPhotos: [PhotoAssetModel] = []
     // 選択された写真を保持
     @Published var selectedPhotos: [PhotoAssetModel] = []
-    //
     // 写真ライブラリ選択画面表示フラグ
     @Published var isPhotoPickerShowing: Bool = false
     

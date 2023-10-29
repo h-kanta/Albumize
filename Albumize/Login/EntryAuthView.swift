@@ -6,76 +6,87 @@
 //
 
 import SwiftUI
-import FirebaseAuth
 
-// 新規登録画面
+// メールアドレス、パスワード入力画面
 struct EntryAuthView: View {
-    @State var name: String = ""
+    // 新規登録画面表示フラグ
+    @Binding var entryAuthIsPresented: Bool
+    
+    // メールアドレス
     @State var email: String = ""
+    // パスワード
     @State var password: String = ""
-    @State var isPresented: Bool = false
     // 認証マネージャー
     @State var authManager = AuthManager()
-    // ストレージマネージャー
-    @State var storageManager = StorageManager()
-    // Firestoreマネージャー
-    @State var firestoreManager = FirestoreManager()
     // エラーメッセージ
     @State var errMessage: String = ""
-    
-    @Binding var entryAuthIsPresented: Bool
+    // ローディング表示フラグ
     @State var isLoading: Bool = false
+    // アラート表示フラグ
     @State var showingAlert: Bool = false
+    // 次の画面遷移フラグ
+    @State var nextPageActive: Bool = false
     
     var body: some View {
         NavigationStack {
             ZStack {
+                // 背景色
                 Color("Bg")
                     .ignoresSafeArea()
                 
                 VStack {
-                    VStack(spacing: 40) {
-                        // 入力フィールド
-                        VStack(spacing: 20) {
-                            TextFieldView(title: "アカウント名", text: $name)
-                            TextFieldView(title: "メールアドレス", text: $email)
-                            SecureFieldView(title: "パスワード", text: $password)
+                    VStack {
+                        VStack(spacing: 40) {
+                            VStack(alignment: .leading) {
+                                Text("メールアドレスを入力してください。")
+                                TextFieldView(title: "メールアドレス", text: $email, disabled: false)
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text("パスワードを入力してください。")
+                                SecureFieldView(title: "パスワード", text: $password)
+                            }
                         }
+                        .foregroundColor(.black.opacity(0.6))
+                        .padding(.vertical)
                         
-                        // MARK: アカウント登録
-                        Button {
-                            // ローディング表示
-                            withAnimation {
-                                isLoading = true
-                            }
-                            // エラーメッセージ初期化
-                            errMessage = ""
-                            authManager.createUser(email: email, password: password, name: name)  { result in
-                                if result {
-                                    // デフォルトのプロフィール画像をStorageに格納
-                                    if let userId = authManager.auth.currentUser?.uid {
-                                        let profilePath = "profile/\(userId)/profile.png"
-                                        storageManager.saveStorage(image: "DefaultProfile", path: profilePath) { result in
-                                            if result {
-                                                // ユーザー情報をFirestoreへ保存
-                                                firestoreManager.saveUserData(userId: userId, userName: name, email: email, imageURL: profilePath)
-                                                
-                                                isPresented = true
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    isLoading = false
-                                    errMessage = authManager.errMessage
-                                    showingAlert = true
+                        Spacer()
+                        
+                        // MARK: メールアドレス、パスワード設定
+                        if email == "" || password == "" {
+                            Text("次へ")
+                                .padding()
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .background(.black.opacity(0.4))
+                                .cornerRadius(10)
+                                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
+                        } else {
+                            Button {
+                                //ローディング表示
+                                withAnimation {
+                                    isLoading = true
                                 }
+                                //エラーメッセージ初期化
+                                errMessage = ""
+                                authManager.createUser(email: email, password: password) { result in
+                                    if result {
+                                        if authManager.auth.currentUser != nil {
+                                            nextPageActive = true
+                                            isLoading = false
+                                        }
+                                    } else {
+                                        errMessage = authManager.errMessage
+                                        isLoading = false
+                                        showingAlert = true
+                                    }
+                                }
+                            } label: {
+                                ButtonView(text: "次へ", color: Color("Sub"))
                             }
-                        } label: {
-                            ButtonView(text: "新規登録", color: Color("Sub"))
                         }
                     }
-                    
-                    Spacer()
                 }
                 .padding()
                 
@@ -84,9 +95,9 @@ struct EntryAuthView: View {
                     ProgressView("Loading...")
                 }
             }
-            .navigationBarTitle("新規登録", displayMode: .inline)
+//            .navigationBarTitle("新規登録", displayMode: .inline)
             
-            // ばつ
+            // 閉じるボタン
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Image(systemName: "xmark")
@@ -100,9 +111,9 @@ struct EntryAuthView: View {
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text(errMessage))
             }
-            // メイン画面に遷移
-            .fullScreenCover(isPresented: $isPresented) {
-                ContentView()
+            // 次の画面へ
+            .navigationDestination(isPresented: $nextPageActive){
+                EntryAuthConfirmView(email: $email)
             }
         }
     }
@@ -110,7 +121,7 @@ struct EntryAuthView: View {
 
 struct EntryAuthView_Previews: PreviewProvider {
     static var previews: some View {
-        @State var entryAuthIsPresented = true
+        @State var entryAuthIsPresented: Bool = true
         EntryAuthView(entryAuthIsPresented: $entryAuthIsPresented)
     }
 }
@@ -119,15 +130,28 @@ struct EntryAuthView_Previews: PreviewProvider {
 struct TextFieldView: View {
     var title: String
     @Binding var text: String
+    var disabled: Bool
     
     var body: some View {
-        TextField(title, text: $text)
-            .font(.title2)
-            .padding(10)
-            .background(.white)
-            .cornerRadius(10)
-            .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
-            .autocapitalization(.none)
+        if disabled {
+            TextField(title, text: $text)
+                .font(.title2)
+                .padding(10)
+                .background(.black.opacity(0.2))
+                .cornerRadius(10)
+                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
+                .autocapitalization(.none)
+                .disabled(disabled)
+        } else {
+            TextField(title, text: $text)
+                .font(.title2)
+                .padding(10)
+                .background(.white)
+                .cornerRadius(10)
+                .shadow(color: Color.black.opacity(0.10), radius: 5, x: 3, y: 3)
+                .autocapitalization(.none)
+                .disabled(disabled)
+        }
     }
 }
 

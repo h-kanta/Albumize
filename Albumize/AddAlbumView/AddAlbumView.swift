@@ -12,15 +12,22 @@ struct AddAlbumView: View {
     
     @StateObject var photoPicker: PhotoPickerViewModel
     @StateObject var albumData: AlbumViewModel
-    // アルバム名入力テキスト
+    @StateObject var userData: UserViewModel
+    // アルバム名
     @State var albumName: String = ""
+    // アルバム作成用写真
     @State var photos: [Photo] = []
-    
+    // 4列グリッド
     @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 4), count: 4)
-
+    // エラーメッセージ
+    @State var errMessage: String = ""
+    // アラート表示フラグ
+    @State var isShowingAlert: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
+                // 背景
                 Color("Bg")
                     .ignoresSafeArea()
                 
@@ -44,17 +51,45 @@ struct AddAlbumView: View {
                         // 追加ボタン
                         if albumName != "" {
                             Button {
-                                albumData.albums.append(
-                                    Album(
-                                        name: albumName,
-                                        createDate: "2023年7月18日",
-                                        thumbnail: Image(uiImage: photoPicker.selectedPhotos[0].thumbnail!),
-                                        photos: photos
-                                    ))
-                                photoPicker.selectedPhotos.removeAll()
-                                photoPicker.isPhotoPickerShowing = false
-    
-    
+//                                albumData.albums.append(
+//                                    Album(
+//                                        name: albumName,
+//                                        createDate: "2023年7月18日",
+//                                        thumbnail: Image(uiImage: photoPicker.selectedPhotos[0].thumbnail!),
+//                                        photos: photos
+//                                    ))
+//                                photoPicker.selectedPhotos.removeAll()
+//                                photoPicker.isPhotoPickerShowing = false
+                                
+                                // フォルダ名を取得
+                                let storageName = userData.userInfo.isInGroup ? "groups" : "users"
+                                // グループID or ユーザーID取得
+                                let id = userData.userInfo.isInGroup ? "" : userData.userInfo.id
+                                // アルバムIDを取得
+                                let albumId = UUID().uuidString
+                                // 保存先のURL
+                                let storageUrl = "/\(storageName)/\(id)/albums/\(albumId)/"
+                                
+                                // MARK: アルバム写真を保存
+                                albumData.saveAlbumImage(profileImageurl: storageUrl,
+                                                         photos: photoPicker.selectedPhotos) { result in
+                                    if result {
+                                        // MARK: アルバムを作成
+                                        albumData.saveAlbumData(userGorupCollection: storageName, userGroupid: id, albumId: albumId, albumName: albumName)
+                                            
+                                            
+                                                print(albumData.albums)
+                                                // 選択した写真をクリア
+                                                photoPicker.selectedPhotos.removeAll()
+                                                // アルバム作成画面を閉じる
+                                                photoPicker.isPhotoPickerShowing = false
+                                            
+                                    } else {
+                                        errMessage = "写真の保存に失敗しました。"
+                                        isShowingAlert = true
+                                    }
+                                }
+                                
                             } label: {
                                 Text("追加")
                                     .font(.callout)
@@ -71,6 +106,7 @@ struct AddAlbumView: View {
                     
                     Spacer()
                     
+                    // アルバム入力
                     VStack(alignment: .leading) {
                         Text("アルバム名を入力してください。")
                             .foregroundColor(.black.opacity(0.6))
@@ -83,6 +119,7 @@ struct AddAlbumView: View {
                     }
                     .padding()
                     
+                    // 選択済み写真一覧
                     ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: gridColumns, spacing: 4) {
                             ForEach(photoPicker.selectedPhotos) { photo in
@@ -111,10 +148,15 @@ struct AddAlbumView: View {
             .navigationBarBackButtonHidden(true)
             // ナビゲーションバーなどの色設定
             .accentColor(.black.opacity(0.5))
+            // アラート（エラーメッセージ）表示
+            .alert(isPresented: $isShowingAlert) {
+                Alert(title: Text(errMessage))
+            }
         }
     }
 }
 
+// MARK: プレビュー
 struct AddAlbumView_Previews: PreviewProvider {
     static var previews: some View {
 //        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())

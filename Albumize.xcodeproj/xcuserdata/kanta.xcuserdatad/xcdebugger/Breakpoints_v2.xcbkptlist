@@ -189,8 +189,8 @@
             filePath = "Albumize/MainView/AlbumView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -237,8 +237,8 @@
             filePath = "Albumize/MainView/AlbumView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -310,210 +310,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E0912773-36CF-4AE4-B0D2-6C3BBA5F45B0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
-            landmarkName = "unknown"
-            landmarkType = "0">
-            <Locations>
-               <Location
-                  uuid = "E0912773-36CF-4AE4-B0D2-6C3BBA5F45B0 - 29aaf1d439a9b707"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Albumize.UIViewControllerImageView.ImageViewController"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  uuid = "E0912773-36CF-4AE4-B0D2-6C3BBA5F45B0 - c5018340aa3c751d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Albumize.UIViewControllerImageView.ImageViewController"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "168">
-               </Location>
-               <Location
-                  uuid = "E0912773-36CF-4AE4-B0D2-6C3BBA5F45B0 - 59149183547fd86c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.__deallocating_deinit"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "E0912773-36CF-4AE4-B0D2-6C3BBA5F45B0 - c5018340aa3c755f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Albumize.UIViewControllerImageView.ImageViewController"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "168">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BAEDED3A-4D05-4AF7-827C-6E2B14FF689B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "unknown"
-            landmarkType = "0">
-            <Locations>
-               <Location
-                  uuid = "BAEDED3A-4D05-4AF7-827C-6E2B14FF689B - 29aaf1d439a9b707"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Albumize.UIViewControllerImageView.ImageViewController"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  uuid = "BAEDED3A-4D05-4AF7-827C-6E2B14FF689B - c5018340aa3c755f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Albumize.UIViewControllerImageView.ImageViewController"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "168">
-               </Location>
-               <Location
-                  uuid = "BAEDED3A-4D05-4AF7-827C-6E2B14FF689B - 59149183547fd86c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.__deallocating_deinit"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  uuid = "BAEDED3A-4D05-4AF7-827C-6E2B14FF689B - c5018340aa3c751d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Albumize.UIViewControllerImageView.ImageViewController"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "168">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C7236AD6-59A2-4C27-8517-1D5DF186191D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
-            landmarkName = "unknown"
-            landmarkType = "0">
-            <Locations>
-               <Location
-                  uuid = "C7236AD6-59A2-4C27-8517-1D5DF186191D - 368e9deb28b74f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "109"
-                  endingLineNumber = "109"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "C7236AD6-59A2-4C27-8517-1D5DF186191D - 368e9deb28b689"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Albumize.UIViewControllerImageView.ImageViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "Albumize"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kanta/Albumize/Albumize/AddAlbumView/PhotoPickerView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "80">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "DC0207A8-09C5-4157-9F7F-F9F184F795B7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -521,8 +317,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -569,8 +365,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -585,8 +381,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -633,8 +429,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -711,8 +507,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -819,8 +615,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -882,8 +678,8 @@
             filePath = "Albumize/AddAlbumView/PhotoPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "GridContent(photoAsset:)"
             landmarkType = "7">
          </BreakpointContent>

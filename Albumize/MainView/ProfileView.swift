@@ -8,14 +8,14 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseStorage
-import FirebaseFirestore
 
 struct ProfileView: View {
     
-    init() {
-        UITableView.appearance().isScrollEnabled = false
-    }
+//    init() {
+//        UITableView.appearance().isScrollEnabled = false
+//    }
     
+    //@State var userData: UserViewModel
     // 認証マネージャー
     @State var authManager: AuthManager = AuthManager()
     @State var isPresented: Bool = false
@@ -27,46 +27,55 @@ struct ProfileView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    Image("DefaultProfile")
+                    Image("DefaultProfileImage")
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 70, height: 70)
                         .clipShape(Capsule())
                         .overlay {
                             Circle()
-                                .stroke(.black, style: StrokeStyle(lineWidth: 3))
+                                .stroke(.black, style: StrokeStyle(lineWidth: 1))
                         }
-                        .padding()
+                        .padding(.top)
                     
                     Text("アカウント名")
                         .font(.title3)
                     
+                    Divider()
+                    
                     List {
-                        Section(header:Text("グループ")) {
-                            Text("要素1")
-                            Text("要素2")
-                            Text("要素3")
+                        Section(header:Text("アカウント")) {
+                            Text("ユーザーID")
+                            Text("アカウント編集")
                         }
                         
                         Section(header:Text("グループ")) {
-                            Text("要素1")
-                            Text("要素2")
-                            Text("要素3")
+                            Text("グループ名")
+                            Text("グループ一覧")
+                            Text("グループに招待")
+                            Text("グループから脱退")
+                        }
+                        
+                        Section(header:Text("")) {
+                            // ログアウト
+                            Button {
+                                do {
+                                    try Auth.auth().signOut()
+                                    isPresented = true
+                                } catch let signOutError as NSError {
+                                    print("Error signing out: %@", signOutError)
+                                }
+                            } label: {
+                                Text("ログアウト")
+                            }
+                            
+                            // 退会
+                            Text("退会")
                         }
                     }
                     .scrollContentBackground(.hidden)
                     .background(Color("Bg"))
-                    
-                    Button {
-                        do {
-                            try Auth.auth().signOut()
-                            isPresented = true
-                        } catch let signOutError as NSError {
-                            print("Error signing out: %@", signOutError)
-                        }
-                    } label: {
-                        Text("LogOut")
-                    }
+                
                 }
             }
             
@@ -80,6 +89,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
+        //@State var userData: UserViewModel
         ProfileView()
 //        ContentView()
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Photo: Identifiable {
-    let id: UUID = .init()
-    let namespace: Namespace.ID = Namespace().wrappedValue
+    let id: UUID = UUID()
+    var namespace: Namespace.ID = Namespace().wrappedValue
     var image: Image = .init("")
 }
