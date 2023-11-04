@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KRProgressHUD
 
 // メイン画面
 struct MainView: View {
@@ -17,8 +18,6 @@ struct MainView: View {
     @State var authManager = AuthManager()
     // タブ
     @State var activeTab: Tab = .home
-    // ローディング
-    @State var isLoading: Bool = false
     
     var body: some View {
         ZStack {
@@ -50,11 +49,6 @@ struct MainView: View {
             if photoData.isSelectedPhoto {
                 PhotoView(photoData: photoData)
             }
-            
-            // ローディング
-            if isLoading {
-                ProgressView("Loading...")
-            }
         }
         // アルバム追加画面に遷移
         .fullScreenCover(isPresented: $photoPicker.isPhotoPickerShowing) {
@@ -67,7 +61,7 @@ struct MainView: View {
         .onAppear {
             // ローディング表示
             withAnimation {
-                isLoading = true
+                KRProgressHUD.show(withMessage: "読み込み中...")
             }
             // ユーザー情報取得
             userData.loadUserInfo() { result in
@@ -77,7 +71,7 @@ struct MainView: View {
                     let id = userData.userInfo.isInGroup ? "" : userData.userInfo.id
                     albumData.loadAlbums(collection: collection, id: id) { result in
                         if result {
-                            isLoading = false
+                            KRProgressHUD.dismiss()
                         }
                     }
                 }

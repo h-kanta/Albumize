@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import KRProgressHUD
 
 // ログイン画面
 struct LoginAuthView: View {
@@ -19,7 +20,6 @@ struct LoginAuthView: View {
     @State var errMessage: String = ""
     
     @Binding var loginAuthIsPresented: Bool
-    @State var isLoading: Bool = false
     @State var isShowingAlert: Bool = false
     
     var body: some View {
@@ -41,7 +41,7 @@ struct LoginAuthView: View {
                         Button {
                             // ローディング表示
                             withAnimation {
-                                isLoading = true
+                                KRProgressHUD.show(withMessage: "読み込み中...")
                             }
                             // ログインする
                             authManager.Login(email: email, password: password) { loginResult in
@@ -51,13 +51,13 @@ struct LoginAuthView: View {
                                         if authResult {
                                             nextPageActive = true
                                         } else {
-                                            isLoading = false
+                                            KRProgressHUD.dismiss()
                                             errMessage = "メール認証がまだ完了していません。\n認証リンクがメールボックスに届いているか確認してください。"
                                             isShowingAlert = true
                                         }
                                     }
                                 } else {
-                                   isLoading = false
+                                   KRProgressHUD.dismiss()
                                    errMessage = authManager.errMessage
                                    isShowingAlert = true
                                 }
@@ -70,11 +70,6 @@ struct LoginAuthView: View {
                     Spacer()
                 }
                 .padding()
-                
-                // ローディング
-                if isLoading {
-                    ProgressView("Loading...")
-                }
             }
             .navigationBarTitle("ログイン", displayMode: .inline)
             // ばつ

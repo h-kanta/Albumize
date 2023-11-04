@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KRProgressHUD
 
 struct AddAlbumView: View {
     @Environment(\.dismiss) var dismiss
@@ -23,8 +24,6 @@ struct AddAlbumView: View {
     @State var errMessage: String = ""
     // アラート表示フラグ
     @State var isShowingAlert: Bool = false
-    // ローディング
-    @State var isLoading: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -54,7 +53,7 @@ struct AddAlbumView: View {
                         if albumName != "" {
                             Button {
                                 withAnimation {
-                                    isLoading = true
+                                    KRProgressHUD.show(withMessage: "作成中...")
                                 }
                                 // フォルダ名を取得
                                 let storageName = userData.userInfo.isInGroup ? "groups" : "users"
@@ -68,11 +67,11 @@ struct AddAlbumView: View {
                                 // MARK: アルバム写真を保存
                                 albumData.createAlbum(albumStorageUrl: storageUrl, albumPhotos: photoPicker.selectedPhotos, collection: storageName, id: id, albumId: albumId, name: albumName) { result in
                                     if result {
-                                        isLoading = false
                                         // 選択した写真をクリア
                                         photoPicker.selectedPhotos.removeAll()
                                         // アルバム作成画面を閉じる
                                         photoPicker.isPhotoPickerShowing = false
+                                        KRProgressHUD.dismiss()
                                     }
                                 }
                                 
@@ -128,10 +127,6 @@ struct AddAlbumView: View {
                     }
                     .padding()
                     
-                }
-                // ローディング
-                if isLoading {
-                    ProgressView("Loading...")
                 }
             }
             // ナビゲーションリンクの戻るボタンを非表示

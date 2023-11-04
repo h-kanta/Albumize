@@ -220,7 +220,7 @@ class AlbumViewModel: ObservableObject {
             
             if let thumbnail = photo.thumbnail {
                 // pngに変換する。できない場合は処理終了
-                guard let imageData = thumbnail.jpegData(compressionQuality: 0.8) else {
+                guard let imageData = thumbnail.jpegData(compressionQuality: 0.3) else {
                     // エラー
                     errorOrNil = StringError.message("画像をjpgに変換できませんでした。")
                     semaphore.signal()

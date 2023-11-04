@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KRProgressHUD
 
 // メールアドレス、パスワード入力画面
 struct EntryAuthView: View {
@@ -20,8 +21,6 @@ struct EntryAuthView: View {
     @State var authManager = AuthManager()
     // エラーメッセージ
     @State var errMessage: String = ""
-    // ローディング表示フラグ
-    @State var isLoading: Bool = false
     // アラート表示フラグ
     @State var showingAlert: Bool = false
     // 次の画面遷移フラグ
@@ -66,19 +65,19 @@ struct EntryAuthView: View {
                             Button {
                                 //ローディング表示
                                 withAnimation {
-                                    isLoading = true
+                                    KRProgressHUD.show(withMessage: "読み込み中...")
                                 }
                                 //エラーメッセージ初期化
                                 errMessage = ""
                                 authManager.createUser(email: email, password: password) { result in
                                     if result {
                                         if authManager.auth.currentUser != nil {
+                                            KRProgressHUD.dismiss()
                                             nextPageActive = true
-                                            isLoading = false
                                         }
                                     } else {
+                                        KRProgressHUD.dismiss()
                                         errMessage = authManager.errMessage
-                                        isLoading = false
                                         showingAlert = true
                                     }
                                 }
@@ -89,11 +88,6 @@ struct EntryAuthView: View {
                     }
                 }
                 .padding()
-                
-                // ローディング
-                if isLoading {
-                    ProgressView("Loading...")
-                }
             }
 //            .navigationBarTitle("新規登録", displayMode: .inline)
             
