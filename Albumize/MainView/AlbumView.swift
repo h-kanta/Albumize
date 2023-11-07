@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 // アルバム
 struct AlbumView: View {
@@ -31,23 +32,23 @@ struct AlbumView: View {
                     Text("").frame(height: 0) // 空白を作るため
                     
                     ScrollView(showsIndicators: false) {
-                        LazyVStack {
-                            ZStack {
-                                VStack(spacing: 10) {
+                        ZStack {
+                            VStack(spacing: 10) {
+                                LazyVStack {
                                     ForEach($albumData.albums) { album in
                                         ZStack {
                                             NavigationLink {
-                                                AlbumDetailView(photoData: photoData, album: album)
+                                                AlbumDetailView(photoData: photoData, albumData: albumData, album: album)
                                             } label: {
                                                 AlbumCardView(album: album)
                                             }
-                                            
+                                                
                                             FavoriteButtonView(album: album)
                                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                                                 .padding()
+                                            }
                                         }
                                     }
-                                }
                                 .padding([.horizontal, .bottom])
                             }
                             .zIndex(1)
@@ -77,16 +78,38 @@ struct AlbumView_Previews: PreviewProvider {
 // アルバムカード
 struct AlbumCardView: View {
     @Binding var album: Album
+    
+    let formatter = DateFormatter()
+    
     var body: some View {
         ZStack {
-            if album.photos.count != 0 {
-                album.photos[0].image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(height: 180, alignment: .center)
-                    .brightness(-0.3) // 明るさを調整
-                    .opacity(0.8) // 透明度を調整
-                    .cornerRadius(10)
+            if album.photoUrls.count != 0 {
+//                album.photos[0].image
+//                    .resizable()
+//                    .scaledToFill()
+//                    .frame(height: 180, alignment: .center)
+//                    .brightness(-0.3) // 明るさを調整
+//                    .opacity(0.8) // 透明度を調整
+//                    .cornerRadius(10)
+                AsyncImage(url: album.photoUrls[0]) { phase in
+                    if let image = phase.image {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 180, alignment: .center)
+                            .brightness(-0.3) // 明るさを調整
+                            .opacity(0.8) // 透明度を調整
+                            .cornerRadius(10)
+                    } else if let error = phase.error {
+                        Text(error.localizedDescription)
+                    } else {
+                        ProgressView()
+                            .frame(height: 180, alignment: .center)
+                            .brightness(-0.3) // 明るさを調整
+                            .opacity(0.8) // 透明度を調整
+                            .cornerRadius(10)
+                    }
+                }
                 
                 VStack(alignment: .leading) {
                     // アルバム名
@@ -96,9 +119,9 @@ struct AlbumCardView: View {
                         .padding(.bottom, 3)
                     // 作成日 - アルバム写真数
                     HStack(spacing: 3) {
-                        Text(album.createdAt.description)
-                        Text("-")
-                        Text("\(album.photos.count) 写真")
+                        Text(album.createdAt)
+                        Text(" - ")
+                        Text("\(album.photoCount) 写真")
                     }
                     .font(.caption)
                 }

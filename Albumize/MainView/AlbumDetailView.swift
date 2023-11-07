@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct AlbumDetailView: View {
     
     @StateObject var photoData: PhotoViewModel
+    @StateObject var albumData: AlbumViewModel
     @Binding var album: Album
     
     @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 1), count: 3)
     
     let deviceSize = UIScreen.main.bounds.size
+    
+    let cache = ImageCache.default
           
     var body: some View {
         NavigationStack {
@@ -31,9 +35,9 @@ struct AlbumDetailView: View {
                                 .fontWeight(.bold)
                             // 作成日 - アルバム写真数
                             HStack(spacing: 3) {
-                                Text(album.createdAt.description)
+                                Text(album.createdAt)
                                 Text("-")
-                                Text("\(album.photos.count) 写真")
+                                Text("\(album.photoCount) 写真")
                             }
                             .font(.caption)
                             .foregroundColor(.gray)
@@ -47,35 +51,65 @@ struct AlbumDetailView: View {
                     
                     ScrollView(showsIndicators: true) {
                         LazyVGrid(columns: gridColumns, spacing: 1) {
-                            ForEach(album.photos) { photo in
-//                                    Rectangle()
-//                                        .overlay {
-//                                            photo.image
-//                                                .resizable()
-//                                                .scaledToFill()
-//                                        }
-//                                        .foregroundColor(Color("Bg"))
-//                                        .scaledToFit()
-//                                        .cornerRadius(3)
-                                photo.image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
-                                    .contentShape(Rectangle())
-                                    .matchedGeometryEffect(
-                                        id: photo.id,
-                                        in: photo.namespace,
-                                        isSource: !photoData.isSelectedPhoto
-                                    )
-                                    .clipped()
-                                    .onTapGesture {
-                                        withAnimation(.spring(response: 0.2, dampingFraction: 0.75)) {
-                                            photoData.photos = album.photos
-                                            photoData.photoPosition = .zero
-                                            photoData.isSelectedPhoto = true
-                                            photoData.selectedPhotoID = photo.id
-                                        }
+                            ForEach(album.photoUrls, id: \.self) { url in
+                                AsyncImage(url: url) { phase in
+                                    if let image = phase.image {
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
+                                            .contentShape(Rectangle())
+//                                            .matchedGeometryEffect(
+//                                                id: photo.id,
+//                                                in: photo.namespace,
+//                                                isSource: !photoData.isSelectedPhoto
+//                                            )
+                                            .clipped()
+                                            .onTapGesture {
+                                                withAnimation(.spring(response: 0.2, dampingFraction: 0.75)) {
+                                                    photoData.photos = album.photos
+                                                    photoData.photoPosition = .zero
+                                                    photoData.isSelectedPhoto = true
+                                                    //photoData.selectedPhotoID = photo.id
+                                                }
+                                            }
+                                    } else if let error = phase.error {
+                                        Text(error.localizedDescription)
+                                    } else {
+                                        ProgressView()
+                                            .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
+                                            .contentShape(Rectangle())
+                                            .background(.white)
                                     }
+                                }
+//                                Rectangle()
+//                                    .overlay {
+//                                        photo.image
+//                                            .resizable()
+//                                            .scaledToFill()
+//                                    }
+//                                    .foregroundColor(.black)
+//                                    .scaledToFit()
+//                                    .cornerRadius(3)
+//                                photo.image
+//                                    .resizable()
+//                                    .scaledToFill()
+//                                    .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
+//                                    .contentShape(Rectangle())
+//                                    .matchedGeometryEffect(
+//                                        id: photo.id,
+//                                        in: photo.namespace,
+//                                        isSource: !photoData.isSelectedPhoto
+//                                    )
+//                                    .clipped()
+//                                    .onTapGesture {
+//                                        withAnimation(.spring(response: 0.2, dampingFraction: 0.75)) {
+//                                            photoData.photos = album.photos
+//                                            photoData.photoPosition = .zero
+//                                            photoData.isSelectedPhoto = true
+//                                            photoData.selectedPhotoID = photo.id
+//                                        }
+//                                    }
 
                             }
                         }
@@ -88,13 +122,24 @@ struct AlbumDetailView: View {
                         .fontWeight(.bold)
                 }
             }
+            .onAppear {
+//                if (album.photoCount != album.photoUrls.count) {
+//                    albumData.readAlbumPhoto(album: album) { urls in
+//                        album.photoUrls = urls
+//                    }
+//                }
+                
+                for url in album.photoUrls {
+                    print(url)
+                }
+            }
         }
     }
 }
 
 struct AlbumDetailView_Previews: PreviewProvider {
     static var previews: some View {
-//        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
+        //        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
         ContentView()
     }
 }

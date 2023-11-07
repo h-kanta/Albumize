@@ -12,7 +12,9 @@ struct Album: Identifiable {
     var albumName: String = ""
     var albumUrl: String = ""
     var photos: [Photo] = []
+    var photoUrls: [URL] = []
+    var photoCount: Int = 0
     var isFavorited: Bool = false
-    var createdAt: Date = Date()
-    var updatedAt: Date = Date()
+    var createdAt: String = ""
+    var updatedAt: String = ""
 }

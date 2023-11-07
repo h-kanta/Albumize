@@ -754,6 +754,7 @@ PODS:
     - gRPC-Core/Interface (= 1.49.1)
   - gRPC-Core/Interface (1.49.1)
   - GTMSessionFetcher/Core (3.1.1)
+  - Kingfisher (7.10.0)
   - KRActivityIndicatorView (3.0.7)
   - KRProgressHUD (3.4.7):
     - KRActivityIndicatorView (= 3.0.7)
@@ -771,6 +772,7 @@ DEPENDENCIES:
   - FirebaseCore
   - FirebaseFirestore
   - FirebaseStorage
+  - Kingfisher
   - KRProgressHUD
 
 SPEC REPOS:
@@ -791,6 +793,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - Kingfisher
     - KRActivityIndicatorView
     - KRProgressHUD
     - leveldb-library
@@ -815,6 +818,7 @@ SPEC CHECKSUMS:
   "gRPC-C++": 2df8cba576898bdacd29f0266d5236fa0e26ba6a
   gRPC-Core: a21a60aefc08c68c247b439a9ef97174b0c54f96
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  Kingfisher: a18f05d3b6d37d8650ee4a3e61d57a28fc6207f6
   KRActivityIndicatorView: ad69e89c4ce40c986cf580595be4829dcad0e35a
   KRProgressHUD: a248f0bc6c9c2aed40a37b76e03ffecc7f85c887
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
@@ -822,6 +826,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
 
-PODFILE CHECKSUM: 830c944b32f583f0f6366458f22c0444efac8b14
+PODFILE CHECKSUM: 688825c5a6fae57dc0ef2d54e129bef7d0007b12
 
 COCOAPODS: 1.12.1

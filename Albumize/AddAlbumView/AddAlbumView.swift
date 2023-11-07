@@ -60,7 +60,7 @@ struct AddAlbumView: View {
                                 // グループID or ユーザーID取得
                                 let id = userData.userInfo.isInGroup ? "" : userData.userInfo.id
                                 // アルバムIDを取得
-                                let albumId = UUID().uuidString
+                                let albumId = "\(Int(Date().timeIntervalSince1970 * 1000))"
                                 // 保存先のURL
                                 let storageUrl = "/\(storageName)/\(id)/albums/\(albumId)/"
                                 
@@ -76,13 +76,13 @@ struct AddAlbumView: View {
                                 }
                                 
                             } label: {
-                                Text("追加")
+                                Text("作成")
                                     .font(.callout)
                                     .fontWeight(.bold)
                                     .foregroundColor(Color("Primary"))
                             }
                         } else {
-                            Text("追加")
+                            Text("作成")
                                 .font(.callout)
                                 .foregroundColor(.black.opacity(0.3))
                         }
