@@ -15,6 +15,7 @@ class AlbumViewModel: ObservableObject {
     @Published var selectedAlbumID: UUID = .init()
     @Published var favoriteAlbums: [Album] = []
     
+    var loadTask: Task<UIImage, Error>?
     // Kingfisher のキャッシュ
     let cache = ImageCache.default
     
@@ -30,17 +31,8 @@ class AlbumViewModel: ObservableObject {
                 for document in documents! {
                     let albumUrl = document["albumUrl"] as? String ?? ""
                     let items = try self.getAlbumDirectory(url: albumUrl, isAll: true)
-                    
-                    //if self.cache.isCached(forKey: items[0].fullPath) {
-                        // キャッシュ上に画像がある場合
-//                        let image = try self.readCache(storageUrl: items[0].fullPath)
-//                        albumDatas.append(self.setAlbumData(document: document, albumPhotos: image))
-                    //} else {
-                        // キャッシュ上に画像がない場合
-                        let urls = try self.getAlbumImageUrls(albumStorageItems: items)
-                        //let image = try self.getImageByUrls(imageUrls: url)
-                        albumDatas.append(self.setAlbumData(document: document, albumPhotos: urls))
-                    //}
+                    let urls = try self.getAlbumImageUrls(albumStorageItems: items)
+                    albumDatas.append(self.setAlbumData(document: document, albumPhotos: urls))
                 }
             } catch {
                 // エラー処理
@@ -58,7 +50,7 @@ class AlbumViewModel: ObservableObject {
     
     //
     func getAlbumDocuments(userOrGroupCollection: String,
-                             userOrGroupId: String) throws -> [QueryDocumentSnapshot]? {
+                           userOrGroupId: String) throws -> [QueryDocumentSnapshot]? {
         var documents: [QueryDocumentSnapshot]? = []
         let semaphore = DispatchSemaphore(value: 0)
         var errorOrNil: Error?
@@ -86,7 +78,7 @@ class AlbumViewModel: ObservableObject {
         semaphore.wait()
         return documents
     }
-     
+    
     //
     func getAlbumDirectory(url: String, isAll: Bool = false) throws -> ([StorageReference]) {
         var albumStorageItems: [StorageReference] = []
@@ -157,7 +149,7 @@ class AlbumViewModel: ObservableObject {
             
             semaphore.wait()
         }
-    
+        
         if let error = errorOrNil {
             throw error
         }
@@ -166,71 +158,47 @@ class AlbumViewModel: ObservableObject {
     }
     
     //
-//    func getImageByUrls(imageUrls: [(URL, String)]) throws -> [Photo] {
-//        var albumPhotos: [Photo] = []
-//
-//        for imageUrl in imageUrls {
-//            let dataUrl = imageUrl.0
-//            let storageUrl = imageUrl.1
-//
-//            let url = URL(string: dataUrl.absoluteString)
-//            do {
-//                let imageData = try Data(contentsOf: url!)
-//                let uiImage = UIImage(data: imageData)!
-//                // キャッシュに保存
-//                //cache.store(uiImage, forKey: storageUrl)
-//                albumPhotos.append(Photo(image: Image(uiImage: uiImage)))
-//            } catch let err {
-//                throw err
-//            }
-//        }
-//
-//        return albumPhotos
-//    }
-    
+    //    func getImageByUrls(imageUrls: [(URL, String)]) throws -> [Photo] {
+    //        var albumPhotos: [Photo] = []
     //
-//    func setAlbumData(document: QueryDocumentSnapshot, albumPhotos: [Photo]) -> Album {
-//        // 日付フォーマット（yyyy年MM月dd日）
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "ydMMM",                                                                   options: 0,locale: Locale(identifier: "ja_JP"))
-//
-//        let createdAt: Timestamp = document["createdAt"] as! Timestamp
-//        let updatedAt: Timestamp = document["updatedAt"] as! Timestamp
-//
-//        // アルバム情報格納
-//        let album = Album(id: document.documentID,
-//                          albumName: document["albumName"] as? String ?? "",
-//                          albumUrl: document["albumUrl"] as? String ?? "",
-//                          photos: albumPhotos,
-//                          photoCount: document["photoCount"] as? Int ?? 0,
-//                          isFavorited: document["isFavorited"] as? Bool ?? false,
-//                          createdAt: formatter.string(from: createdAt.dateValue()),
-//                          updatedAt: formatter.string(from: updatedAt.dateValue())
-//                    )
-//
-//        return album
-//    }
+    //        for imageUrl in imageUrls {
+    //            let dataUrl = imageUrl.0
+    //            let storageUrl = imageUrl.1
+    //
+    //            let url = URL(string: dataUrl.absoluteString)
+    //            do {
+    //                let imageData = try Data(contentsOf: url!)
+    //                let uiImage = UIImage(data: imageData)!
+    //                // キャッシュに保存
+    //                //cache.store(uiImage, forKey: storageUrl)
+    //                albumPhotos.append(Photo(image: Image(uiImage: uiImage)))
+    //            } catch let err {
+    //                throw err
+    //            }
+    //        }
+    //
+    //        return albumPhotos
+    //    }
     
     func setAlbumData(document: QueryDocumentSnapshot, albumPhotos: [URL]) -> Album {
         // 日付フォーマット（yyyy年MM月dd日）
         let formatter = DateFormatter()
         formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "ydMMM",                                                                   options: 0,locale: Locale(identifier: "ja_JP"))
-
+        
         let createdAt: Timestamp = document["createdAt"] as! Timestamp
         let updatedAt: Timestamp = document["updatedAt"] as! Timestamp
-
+        
         // アルバム情報格納
         let album = Album(id: document.documentID,
                           albumName: document["albumName"] as? String ?? "",
                           albumUrl: document["albumUrl"] as? String ?? "",
-                          //photos: albumPhotos,
                           photoUrls: albumPhotos,
                           photoCount: document["photoCount"] as? Int ?? 0,
                           isFavorited: document["isFavorited"] as? Bool ?? false,
                           createdAt: formatter.string(from: createdAt.dateValue()),
                           updatedAt: formatter.string(from: updatedAt.dateValue())
-                    )
-
+        )
+        
         return album
     }
     
@@ -250,9 +218,9 @@ class AlbumViewModel: ObservableObject {
                 semaphore.signal()
             }
         }
-            
+        
         semaphore.wait()
-            
+        
         if let error = errorOrNil {
             throw error
         }
@@ -262,12 +230,12 @@ class AlbumViewModel: ObservableObject {
     
     // MARK: アルバム作成
     func createAlbum(albumStorageUrl: String,
-                  albumPhotos: [PhotoAssetModel],
-                  collection: String,
-                  id: String,
-                  albumId: String,
-                  name: String,
-                  complition: @escaping (Bool) -> Void) {
+                     albumPhotos: [PhotoAssetModel],
+                     collection: String,
+                     id: String,
+                     albumId: String,
+                     name: String,
+                     complition: @escaping (Bool) -> Void) {
         var albumData: Album = .init()
         
         DispatchQueue.global().async {
@@ -276,7 +244,6 @@ class AlbumViewModel: ObservableObject {
                 let albumUrl = "\(collection)/\(id)/albums/\(albumId)"
                 let items = try self.getAlbumDirectory(url: albumUrl, isAll: true)
                 let url = try self.getAlbumImageUrls(albumStorageItems: items)
-//                let photos = try self.getImageByUrls(imageUrls: url)
                 let album = try self.saveAlbumData(userGorupCollection: collection,
                                                    userGroupid: id,
                                                    albumId: albumId,
@@ -303,7 +270,7 @@ class AlbumViewModel: ObservableObject {
     }
     //
     func saveAlbumStorage(albumStorageUrl: String,
-                        photos: [PhotoAssetModel]) throws -> Void {
+                          photos: [PhotoAssetModel]) throws -> Void {
         let semaphore = DispatchSemaphore(value: 0)
         var errorOrNil: Error?
         
@@ -348,7 +315,7 @@ class AlbumViewModel: ObservableObject {
             
             semaphore.wait()
         }
-
+        
         // エラー
         if let error = errorOrNil {
             throw error
@@ -401,164 +368,15 @@ class AlbumViewModel: ObservableObject {
         formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "ydMMM",                                                                   options: 0,locale: Locale(identifier: "ja_JP"))
         
         let album = Album(id: albumId,
-                              albumName: albumName,
-                              albumUrl: albumUrl,
-                              //photos: photos,
-                              photoUrls: urls,
-                              photoCount: urls.count,
-                              isFavorited: false,
-                              createdAt: formatter.string(from: albumCreatedAt),
-                              updatedAt: formatter.string(from: albumCreatedAt))
+                          albumName: albumName,
+                          albumUrl: albumUrl,
+                          //photos: photos,
+                          photoUrls: urls,
+                          photoCount: urls.count,
+                          isFavorited: false,
+                          createdAt: formatter.string(from: albumCreatedAt),
+                          updatedAt: formatter.string(from: albumCreatedAt))
         
         return album
     }
-    
-    
-    // MARK: アルバム写真読み込み
-    func readAlbumPhoto(album: Album, complition: @escaping ([URL]) -> Void) {
-        var photos: [Photo] = []
-        var urls: [URL] = []
-        var mutableAlbum = album // 'album' を変更可能な変数にコピー
-        
-        DispatchQueue.global().async {
-            do {
-                let items = try self.getAlbumDirectory2(url: album.albumUrl)
-                for item in items {
-                    if self.cache.isCached(forKey: item.fullPath) {
-                        // キャッシュ上に画像がある場合
-                        let image = try self.readCache2(storageUrl: item.fullPath)
-                        //photos.append(image)
-                        
-                    } else {
-                        // キャッシュ上に画像がない場合
-                        let url = try self.getAlbumImageUrl(albumStorageItem: item)
-                        urls.append(url.0)
-                    }
-                }
-            } catch {
-                // エラー処理
-                print(error.localizedDescription)
-            }
-            
-            DispatchQueue.main.async {
-                complition(urls)
-            }
-        }
-    }
-    
-    func getAlbumDirectory2(url: String) throws -> [StorageReference] {
-        var albumStorageItems: [StorageReference] = []
-        let semaphore = DispatchSemaphore(value: 0)
-        var errorOrNil: Error?
-        
-        let storage = Storage.storage()
-        let directoryRef = storage.reference().child(url)
-        
-        // １つ目のディレクトリ内のアイテムをリストアップ
-        directoryRef.listAll { result, error in
-            if let error = error {
-                errorOrNil = error
-                semaphore.signal()
-            }
-            
-            if let result = result {
-                albumStorageItems = result.items
-                semaphore.signal()
-            }
-        }
-        // １つ目のディレクトリ内のアイテムをリストアップ
-        directoryRef.list(maxResults: 1) { result, error in
-            if let error = error {
-                errorOrNil = error
-            }
-            
-            if let result = result {
-                albumStorageItems = result.items
-            }
-        }
-        
-        semaphore.wait()
-        
-        if let error = errorOrNil {
-            throw error
-        }
-        
-        return albumStorageItems
-    }
-    
-    // キャッシュから画像を読み込む
-    func readCache2(storageUrl: String) throws -> Photo {
-        let semaphore = DispatchSemaphore(value: 0)
-        var errorOrNil: Error?
-        
-        var image: Photo = .init()
-        cache.retrieveImage(forKey: storageUrl) { result in
-            switch result {
-            case .success(let value):
-                image = Photo(image: Image(uiImage: value.image!))
-                semaphore.signal()
-            case .failure(let error):
-                errorOrNil = error
-                semaphore.signal()
-            }
-        }
-            
-        semaphore.wait()
-        
-        if let error = errorOrNil {
-            throw error
-        }
-        
-        return image
-    }
-    
-    //
-    func getAlbumImageUrl(albumStorageItem: StorageReference) throws -> (URL, String) {
-        var imageUrl: (URL, String) = (URL(string: "url")!, "")
-        let semaphore = DispatchSemaphore(value: 0)
-        var errorOrNil: Error?
-
-        // アイテムのダウンロードURLを取得し、配列に追加
-        albumStorageItem.downloadURL { url, error in
-            if let error = error {
-                errorOrNil = error
-                semaphore.signal()
-            }
-            
-            if let url = url {
-                imageUrl = (url, albumStorageItem.fullPath)
-                semaphore.signal()
-            }
-        }
-    
-        semaphore.wait()
-        
-        if let error = errorOrNil {
-            throw error
-        }
-        
-        return imageUrl
-    }
-    
-    //
-    func getImageByUrl(imageUrl: (URL, String)) throws -> Photo {
-        var albumPhoto: Photo = .init()
-        
-        let dataUrl = imageUrl.0
-        let storageUrl = imageUrl.1
-        
-        let url = URL(string: dataUrl.absoluteString)
-        do {
-            let imageData = try Data(contentsOf: url!)
-            let uiImage = UIImage(data: imageData)!
-            // キャッシュに保存
-            //cache.store(uiImage, forKey: storageUrl)
-            albumPhoto = Photo(image: Image(uiImage: uiImage))
-        } catch let error {
-            throw error
-        }
-        
-        return albumPhoto
-    }
 }
-
