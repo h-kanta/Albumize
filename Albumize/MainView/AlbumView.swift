@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import CachedAsyncImage
 
 // アルバム
 struct AlbumView: View {
@@ -83,7 +84,7 @@ struct AlbumCardView: View {
     
     var body: some View {
         ZStack {
-            if album.photoUrls.count != 0 {
+            if album.photoCount != 0 {
 //                album.photos[0].image
 //                    .resizable()
 //                    .scaledToFill()
@@ -91,7 +92,7 @@ struct AlbumCardView: View {
 //                    .brightness(-0.3) // 明るさを調整
 //                    .opacity(0.8) // 透明度を調整
 //                    .cornerRadius(10)
-                AsyncImage(url: album.photoUrls[0]) { phase in
+                CachedAsyncImage(url: album.photos[0].imageUrl) { phase in
                     if let image = phase.image {
                         image
                             .resizable()

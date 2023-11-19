@@ -13,9 +13,10 @@ target 'Albumize' do
   pod 'FirebaseStorage'
   pod 'FirebaseFirestore'
   
+  # ローディングView
   pod 'KRProgressHUD'
-  
-  pod 'Kingfisher'
+  #
+  pod 'PINRemoteImage'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

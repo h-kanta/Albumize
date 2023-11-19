@@ -12,7 +12,6 @@ struct Album: Identifiable {
     var albumName: String = ""
     var albumUrl: String = ""
     var photos: [Photo] = []
-    var photoUrls: [URL] = []
     var photoCount: Int = 0
     var isFavorited: Bool = false
     var createdAt: String = ""

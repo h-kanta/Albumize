@@ -17,7 +17,7 @@ struct AddAlbumView: View {
     // アルバム名
     @State var albumName: String = ""
     // アルバム作成用写真
-    @State var photos: [Photo] = []
+    @State var photos: [Image] = []
     // 4列グリッド
     @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 4), count: 4)
     // エラーメッセージ
@@ -119,7 +119,7 @@ struct AddAlbumView: View {
                                         .scaledToFit()
                                         .cornerRadius(3)
                                         .onAppear {
-                                            photos.append(Photo(image: Image(uiImage: thumbnail)))
+                                            photos.append(Image(uiImage: thumbnail))
                                         }
                                 }
                             }

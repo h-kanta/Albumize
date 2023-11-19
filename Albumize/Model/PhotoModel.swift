@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct Photo: Identifiable {
+struct Photo: Identifiable, Hashable {
     let id: UUID = UUID()
     var namespace: Namespace.ID = Namespace().wrappedValue
-    var image: Image = .init("")
+    var imageUrl: URL = .init(filePath: "")
 }

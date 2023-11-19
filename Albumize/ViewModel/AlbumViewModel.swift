@@ -8,7 +8,6 @@
 import SwiftUI
 import FirebaseFirestore
 import FirebaseStorage
-import Kingfisher
 
 class AlbumViewModel: ObservableObject {
     @Published var albums: [Album] = []
@@ -16,8 +15,6 @@ class AlbumViewModel: ObservableObject {
     @Published var favoriteAlbums: [Album] = []
     
     var loadTask: Task<UIImage, Error>?
-    // Kingfisher のキャッシュ
-    let cache = ImageCache.default
     
     // MARK: アルバム情報全件取得
     func loadAlbums(collection: String, id: String, complition: @escaping (Bool) -> Void) {
@@ -31,8 +28,8 @@ class AlbumViewModel: ObservableObject {
                 for document in documents! {
                     let albumUrl = document["albumUrl"] as? String ?? ""
                     let items = try self.getAlbumDirectory(url: albumUrl, isAll: true)
-                    let urls = try self.getAlbumImageUrls(albumStorageItems: items)
-                    albumDatas.append(self.setAlbumData(document: document, albumPhotos: urls))
+                    let photos = try self.getAlbumImageUrls(albumStorageItems: items)
+                    albumDatas.append(self.setAlbumData(document: document, albumPhotos: photos))
                 }
             } catch {
                 // エラー処理
@@ -126,9 +123,9 @@ class AlbumViewModel: ObservableObject {
     }
     
     //
-    func getAlbumImageUrls(albumStorageItems: [StorageReference]) throws -> [URL] {
+    func getAlbumImageUrls(albumStorageItems: [StorageReference]) throws -> [Photo] {
         //var imageUrls: [(URL, String)] = []
-        var imageUrls: [URL] = []
+        var photos: [Photo] = []
         var errorOrNil: Error?
         
         for item in albumStorageItems {
@@ -142,7 +139,7 @@ class AlbumViewModel: ObservableObject {
                 
                 if let url = url {
                     //imageUrls.append((url, item.fullPath))
-                    imageUrls.append(url)
+                    photos.append(Photo(imageUrl: url))
                     semaphore.signal()
                 }
             }
@@ -154,7 +151,7 @@ class AlbumViewModel: ObservableObject {
             throw error
         }
         
-        return imageUrls
+        return photos
     }
     
     //
@@ -180,7 +177,7 @@ class AlbumViewModel: ObservableObject {
     //        return albumPhotos
     //    }
     
-    func setAlbumData(document: QueryDocumentSnapshot, albumPhotos: [URL]) -> Album {
+    func setAlbumData(document: QueryDocumentSnapshot, albumPhotos: [Photo]) -> Album {
         // 日付フォーマット（yyyy年MM月dd日）
         let formatter = DateFormatter()
         formatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "ydMMM",                                                                   options: 0,locale: Locale(identifier: "ja_JP"))
@@ -192,7 +189,7 @@ class AlbumViewModel: ObservableObject {
         let album = Album(id: document.documentID,
                           albumName: document["albumName"] as? String ?? "",
                           albumUrl: document["albumUrl"] as? String ?? "",
-                          photoUrls: albumPhotos,
+                          photos: albumPhotos,
                           photoCount: document["photoCount"] as? Int ?? 0,
                           isFavorited: document["isFavorited"] as? Bool ?? false,
                           createdAt: formatter.string(from: createdAt.dateValue()),
@@ -208,16 +205,16 @@ class AlbumViewModel: ObservableObject {
         var errorOrNil: Error?
         
         var image: [Photo] = []
-        cache.retrieveImage(forKey: storageUrl) { result in
-            switch result {
-            case .success(let value):
-                image.append(Photo(image: Image(uiImage: value.image!)))
-                semaphore.signal()
-            case .failure(let error):
-                errorOrNil = error
-                semaphore.signal()
-            }
-        }
+//        cache.retrieveImage(forKey: storageUrl) { result in
+//            switch result {
+//            case .success(let value):
+//                image.append(Photo(image: Image(uiImage: value.image!)))
+//                semaphore.signal()
+//            case .failure(let error):
+//                errorOrNil = error
+//                semaphore.signal()
+//            }
+//        }
         
         semaphore.wait()
         
@@ -243,12 +240,12 @@ class AlbumViewModel: ObservableObject {
                 try self.saveAlbumStorage(albumStorageUrl: albumStorageUrl, photos: albumPhotos)
                 let albumUrl = "\(collection)/\(id)/albums/\(albumId)"
                 let items = try self.getAlbumDirectory(url: albumUrl, isAll: true)
-                let url = try self.getAlbumImageUrls(albumStorageItems: items)
+                let photos = try self.getAlbumImageUrls(albumStorageItems: items)
                 let album = try self.saveAlbumData(userGorupCollection: collection,
                                                    userGroupid: id,
                                                    albumId: albumId,
                                                    albumName: name,
-                                                   urls: url)
+                                                   photos: photos)
                 
                 albumData = album
             } catch {
@@ -327,7 +324,7 @@ class AlbumViewModel: ObservableObject {
                        userGroupid: String,
                        albumId: String,
                        albumName: String,
-                       urls: [URL]) throws -> Album {
+                       photos: [Photo]) throws -> Album {
         let semaphore = DispatchSemaphore(value: 0)
         var errorOrNil: Error?
         
@@ -341,7 +338,7 @@ class AlbumViewModel: ObservableObject {
         let albumData: [String: Any] = [
             "albumName": albumName,
             "albumUrl": albumUrl,
-            "photoCount": urls.count,
+            "photoCount": photos.count,
             "isFavorited": false,
             "createdAt": Timestamp(date: albumCreatedAt),
             "updatedAt": Timestamp(date: albumCreatedAt)
@@ -370,9 +367,8 @@ class AlbumViewModel: ObservableObject {
         let album = Album(id: albumId,
                           albumName: albumName,
                           albumUrl: albumUrl,
-                          //photos: photos,
-                          photoUrls: urls,
-                          photoCount: urls.count,
+                          photos: photos,
+                          photoCount: photos.count,
                           isFavorited: false,
                           createdAt: formatter.string(from: albumCreatedAt),
                           updatedAt: formatter.string(from: albumCreatedAt))

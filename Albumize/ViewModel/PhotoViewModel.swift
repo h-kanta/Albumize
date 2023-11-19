@@ -8,7 +8,7 @@
 import SwiftUI
 
 class PhotoViewModel: ObservableObject {
-    @Published var photos: [Photo] = []
+    @Published var photoUrls: [Photo] = []
     // 写真が選択されているか
     @Published var isSelectedPhoto: Bool = false
     // 選択した写真

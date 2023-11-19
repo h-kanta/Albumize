@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct PhotoView: View {
     // PhotoModel
@@ -23,18 +24,26 @@ struct PhotoView: View {
                 .opacity(!photoData.isSelectedPhoto ? 0 : min(1, max(0, 1 - abs(Double(photoData.photoPosition.height) / 800))))
             
             TabView(selection: $photoData.selectedPhotoID) {
-                ForEach(photoData.photos) { photo in
-                    photo.image
-                        .resizable()
-                        .scaledToFit()
-                        .tag(photo.id)
-                        .matchedGeometryEffect(
-                            id: photoData.selectedPhotoID,
-                            in: photo.namespace,
-                            isSource: photoData.isSelectedPhoto
-                        )
-                        .offset(photoData.photoPosition)
-                        .ignoresSafeArea()
+                ForEach(photoData.photoUrls) { photo in
+                    CachedAsyncImage(url: photo.imageUrl) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .tag(photo.id)
+                                .matchedGeometryEffect(
+                                    id: photoData.selectedPhotoID,
+                                    in: photo.namespace,
+                                    isSource: photoData.isSelectedPhoto
+                                )
+                                .offset(photoData.photoPosition)
+                                .ignoresSafeArea()
+                        } else if let _ = phase.error {
+                            ProgressView()
+                        } else {
+                            ProgressView()
+                        }
+                    }
                 }
             }
             .gesture(
@@ -167,6 +176,7 @@ struct PhotoView: View {
 //    }
 }
 
+// MARK: プレビュー
 struct PhotoView_Previews: PreviewProvider {
     static var previews: some View {
 //        ContentView(photoData: .init(), albumData: .init(), photoPicker: .init())
