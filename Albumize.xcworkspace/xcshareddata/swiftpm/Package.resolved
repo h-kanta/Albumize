@@ -8,6 +8,15 @@
         "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
         "version" : "2.1.1"
       }
+    },
+    {
+      "identity" : "swiftui-photos-picker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-photos-picker",
+      "state" : {
+        "revision" : "2202c61db3c244e1a8b6a140568cd7b51bd9679f",
+        "version" : "2.0.0"
+      }
     }
   ],
   "version" : 2

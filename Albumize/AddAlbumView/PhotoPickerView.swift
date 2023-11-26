@@ -10,6 +10,7 @@ import PhotosUI
 
 struct PhotoPickerView: View {
     @StateObject var alubmData: AlbumViewModel
+    // フォトピッカー
     @StateObject var photoPicker: PhotoPickerViewModel
     @StateObject var userData: UserViewModel
     // グリッド
@@ -64,15 +65,25 @@ struct PhotoPickerView: View {
                                 GridContent(photoAsset: photoAsset)
                                 //                                if let thumbnail = photoAsset.thumbnail {
                                 //                                    UIViewControllerImageView(image: thumbnail)
-                                    .onAppear {
-                                        if photoAsset.thumbnail == nil {
-                                            let manager = PHCachingImageManager.default()
-                                            manager.requestImage(for: photoAsset.asset, targetSize: CGSize(width: photoAsset.asset.pixelWidth, height: photoAsset.asset.pixelHeight), contentMode: .aspectFill, options: nil) { photo,
-                                                _ in
-                                                photoAsset.thumbnail = photo
-                                            }
-                                        }
-                                    }
+//                                    .onAppear {
+//                                        if photoAsset.thumbnail == nil {
+//                                            let manager = PHCachingImageManager.default()
+//                                            manager.requestImage(for: photoAsset.asset, targetSize: CGSize(width: photoAsset.asset.pixelWidth, height: photoAsset.asset.pixelHeight), contentMode: .aspectFill, options: nil) { photo,
+//                                                _ in
+//                                                photoAsset.thumbnail = photo
+//                                            }
+//                                        }
+//                                        DispatchQueue.global().async {
+//                                            PHCachingImageManager().requestImage(for: photoAsset.asset,
+//                                                                                 targetSize: CGSize(width: photoAsset.asset.pixelWidth, height: photoAsset.asset.pixelHeight),
+//                                                                                 contentMode: .aspectFill,
+//                                                                                 options: nil) { (photo, nil) in
+//                                                DispatchQueue.main.async {
+//                                                    photoAsset.thumbnail = photo
+//                                                }
+//                                            }
+//                                        }
+//                                    }
                             }
                         }
                     }
@@ -134,6 +145,11 @@ struct PhotoPickerView: View {
             }
         }
         .accentColor(Color("Primary").opacity(0.8))
+        .onAppear() {
+            photoPicker.fetchPhotos()
+            print(photoPicker.fetchedPhotos.count)
+            photoPicker.showImage()
+        }
     }
     
     // 写真ライブラリグリッド

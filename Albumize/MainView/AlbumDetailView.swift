@@ -14,7 +14,7 @@ struct AlbumDetailView: View {
     @StateObject var albumData: AlbumViewModel
     @Binding var album: Album
     // グリッドカラム
-    @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 1), count: 3)
+    @State private var gridColumns = Array(repeating: GridItem(.flexible(), spacing: 5), count: 3)
     
     let deviceSize = UIScreen.main.bounds.size
 
@@ -55,7 +55,7 @@ struct AlbumDetailView: View {
                                         image
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
+                                            .frame(width: deviceSize.width/3-5, height: deviceSize.width/3-5)
                                             .contentShape(Rectangle())
                                             .cornerRadius(10)
                                             .matchedGeometryEffect(
@@ -72,56 +72,21 @@ struct AlbumDetailView: View {
                                                     photoData.selectedPhotoID = photo.id
                                                 }
                                             }
-                                    } else if let _ = phase.error {
-                                        ProgressView()
-                                            .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
-                                            .contentShape(Rectangle())
-                                            .cornerRadius(10)
-                                            .background(.white)
-
+                                            .padding(.bottom, 4)
                                     } else {
                                         ProgressView()
-                                            .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
+                                            .frame(width: deviceSize.width/3-5, height: deviceSize.width/3-5)
                                             .contentShape(Rectangle())
                                             .cornerRadius(10)
                                             .background(.white)
                                     }
                                 }
-                                
-//                                Rectangle()
-//                                    .overlay {
-//                                        photo.image
-//                                            .resizable()
-//                                            .scaledToFill()
-//                                    }
-//                                    .foregroundColor(.black)
-//                                    .scaledToFit()
-//                                    .cornerRadius(3)
-//                                photo.image
-//                                    .resizable()
-//                                    .scaledToFill()
-//                                    .frame(width: deviceSize.width/3-1, height: deviceSize.width/3-1)
-//                                    .contentShape(Rectangle())
-//                                    .matchedGeometryEffect(
-//                                        id: photo.id,
-//                                        in: photo.namespace,
-//                                        isSource: !photoData.isSelectedPhoto
-//                                    )
-//                                    .clipped()
-//                                    .onTapGesture {
-//                                        withAnimation(.spring(response: 0.2, dampingFraction: 0.75)) {
-//                                            photoData.photos = album.photos
-//                                            photoData.photoPosition = .zero
-//                                            photoData.isSelectedPhoto = true
-//                                            photoData.selectedPhotoID = photo.id
-//                                        }
-//                                    }
-
-                            }
-                        }
-                    }
-                }
-            }
+                            } // ForEach
+                        } // LazyVGrid
+                    } // ScrollView
+                } // VStack
+                .padding(.horizontal, 5)
+            } // ZStack
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Image(systemName: "ellipsis")

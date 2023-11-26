@@ -27,19 +27,20 @@ struct PhotoView: View {
                 ForEach(photoData.photoUrls) { photo in
                     CachedAsyncImage(url: photo.imageUrl) { phase in
                         if let image = phase.image {
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .tag(photo.id)
-                                .matchedGeometryEffect(
-                                    id: photoData.selectedPhotoID,
-                                    in: photo.namespace,
-                                    isSource: photoData.isSelectedPhoto
-                                )
-                                .offset(photoData.photoPosition)
-                                .ignoresSafeArea()
-                        } else if let _ = phase.error {
-                            ProgressView()
+                            GeometryReader { proxy in
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: proxy.size.width, height: proxy.size.height)
+                                    .tag(photo.id)
+                                    .matchedGeometryEffect(
+                                        id: photoData.selectedPhotoID,
+                                        in: photo.namespace,
+                                        isSource: photoData.isSelectedPhoto
+                                    )
+                                    .offset(photoData.photoPosition)
+                            }
+                            .ignoresSafeArea()
                         } else {
                             ProgressView()
                         }

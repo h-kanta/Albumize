@@ -12,6 +12,8 @@
 		B727CBAA2A653014007F2D4B /* AddAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B727CBA92A653014007F2D4B /* AddAlbumView.swift */; };
 		B72DAB282AA4A579000DA2B1 /* BirthDayPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72DAB272AA4A579000DA2B1 /* BirthDayPickerView.swift */; };
 		B735FC0D2A763D9200D78ADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B735FC0C2A763D9200D78ADC /* GoogleService-Info.plist */; };
+		B737DBB72B0A323F00794BB7 /* PhotosPicker in Frameworks */ = {isa = PBXBuildFile; productRef = B737DBB62B0A323F00794BB7 /* PhotosPicker */; };
+		B737DBB92B0A380500794BB7 /* PhotoViewSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737DBB82B0A380500794BB7 /* PhotoViewSample.swift */; };
 		B73890142A91AD5E00E1595F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73890132A91AD5E00E1595F /* UserModel.swift */; };
 		B73890162A922CCC00E1595F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73890152A922CCC00E1595F /* UserViewModel.swift */; };
 		B73E79B02A485B77007C5C11 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73E79AF2A485B77007C5C11 /* PhotoView.swift */; };
@@ -49,6 +51,7 @@
 		B727CBA92A653014007F2D4B /* AddAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlbumView.swift; sourceTree = "<group>"; };
 		B72DAB272AA4A579000DA2B1 /* BirthDayPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayPickerView.swift; sourceTree = "<group>"; };
 		B735FC0C2A763D9200D78ADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B737DBB82B0A380500794BB7 /* PhotoViewSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewSample.swift; sourceTree = "<group>"; };
 		B73890132A91AD5E00E1595F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		B73890152A922CCC00E1595F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		B73E79AF2A485B77007C5C11 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B737DBB72B0A323F00794BB7 /* PhotosPicker in Frameworks */,
 				ACA3F8E420BD48B62A5EACCD /* Pods_Albumize.framework in Frameworks */,
 				B77BEF502B08E87A00E8D036 /* CachedAsyncImage in Frameworks */,
 			);
@@ -194,6 +198,7 @@
 				B7B089F82A41916100D8280B /* AlbumView.swift */,
 				B706214E2A45D512007D7845 /* AlbumDetailView.swift */,
 				B73E79AF2A485B77007C5C11 /* PhotoView.swift */,
+				B737DBB82B0A380500794BB7 /* PhotoViewSample.swift */,
 				B7B089FA2A41916F00D8280B /* PlanView.swift */,
 				B7B089FC2A41917900D8280B /* ProfileView.swift */,
 			);
@@ -233,6 +238,7 @@
 			name = Albumize;
 			packageProductDependencies = (
 				B77BEF4F2B08E87A00E8D036 /* CachedAsyncImage */,
+				B737DBB62B0A323F00794BB7 /* PhotosPicker */,
 			);
 			productName = Albumize;
 			productReference = B765B8092A40988A00036CFD /* Albumize.app */;
@@ -265,6 +271,7 @@
 			mainGroup = B765B8002A40988A00036CFD;
 			packageReferences = (
 				B77BEF4E2B08E87900E8D036 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+				B737DBB52B0A323F00794BB7 /* XCRemoteSwiftPackageReference "swiftui-photos-picker" */,
 			);
 			productRefGroup = B765B80A2A40988A00036CFD /* Products */;
 			projectDirPath = "";
@@ -339,6 +346,7 @@
 				B7814C702A5112FC0072251E /* PhotoModel.swift in Sources */,
 				B73890162A922CCC00E1595F /* UserViewModel.swift in Sources */,
 				B7AC0E2D2A48248D00FCE7E5 /* PhotoViewModel.swift in Sources */,
+				B737DBB92B0A380500794BB7 /* PhotoViewSample.swift in Sources */,
 				B7B089F92A41916100D8280B /* AlbumView.swift in Sources */,
 				B7655C352A792A6800A170F2 /* LoginAuthView.swift in Sources */,
 				B73E79B02A485B77007C5C11 /* PhotoView.swift in Sources */,
@@ -569,6 +577,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B737DBB52B0A323F00794BB7 /* XCRemoteSwiftPackageReference "swiftui-photos-picker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-photos-picker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		B77BEF4E2B08E87900E8D036 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
@@ -580,6 +596,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B737DBB62B0A323F00794BB7 /* PhotosPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B737DBB52B0A323F00794BB7 /* XCRemoteSwiftPackageReference "swiftui-photos-picker" */;
+			productName = PhotosPicker;
+		};
 		B77BEF4F2B08E87A00E8D036 /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B77BEF4E2B08E87900E8D036 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
